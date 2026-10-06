@@ -1,99 +1,121 @@
-# [Telegram Desktop][telegram_desktop] – Official Messenger
+<div align="center">
 
-This is the complete source code and the build instructions for the official [Telegram][telegram] messenger desktop client, based on the [Telegram API][telegram_api] and the [MTProto][telegram_proto] secure protocol.
+<img src="docs/assets/banner.svg" alt="Katsuki Desktop — a music-first Telegram client with the Sound Glass design language" width="100%"/>
 
-[![Version](https://badge.fury.io/gh/telegramdesktop%2Ftdesktop.svg)](https://github.com/telegramdesktop/tdesktop/releases)
-[![Build Status](https://github.com/telegramdesktop/tdesktop/workflows/Windows./badge.svg)](https://github.com/telegramdesktop/tdesktop/actions)
-[![Build Status](https://github.com/telegramdesktop/tdesktop/workflows/MacOS./badge.svg)](https://github.com/telegramdesktop/tdesktop/actions)
-[![Build Status](https://github.com/telegramdesktop/tdesktop/workflows/Linux./badge.svg)](https://github.com/telegramdesktop/tdesktop/actions)
-[![Built with Depot](https://img.shields.io/badge/Built%20with-Depot.dev-46A75A)](https://depot.dev)
+<br/>
 
-[![Preview of Telegram Desktop][preview_image]][preview_image_url]
+[![CI](https://github.com/haerin-tg/katsuki-desktop/actions/workflows/linux.yml/badge.svg)](https://github.com/haerin-tg/katsuki-desktop/actions/workflows/linux.yml)
+[![License: GPL-3.0](https://img.shields.io/badge/License-GPL%203.0-blue.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey.svg)](#-building)
+[![Status](https://img.shields.io/badge/status-early%20alpha-orange.svg)](#-roadmap)
+[![Based on tdesktop](https://img.shields.io/badge/based%20on-telegramdesktop%2Ftdesktop-26A5E4.svg)](https://github.com/telegramdesktop/tdesktop)
 
-The source code is published under GPLv3 with OpenSSL exception, the license is available [here][license].
+**A Telegram Desktop client where your profile is a listening room.** 💿
 
-## Supported systems
+*勝 — "victory". Built for people who think a chat client should feel like an album.*
 
-The latest version is available for
+</div>
 
-* [Windows 7 and above (64 bit)](https://telegram.org/dl/desktop/win64) ([portable](https://telegram.org/dl/desktop/win64_portable))
-* [Windows 7 and above (32 bit)](https://telegram.org/dl/desktop/win) ([portable](https://telegram.org/dl/desktop/win_portable))
-* [macOS 10.13 and above](https://telegram.org/dl/desktop/mac)
-* [Linux static build for 64 bit](https://telegram.org/dl/desktop/linux)
-* [Snap](https://snapcraft.io/telegram-desktop)
-* [Flatpak](https://flathub.org/apps/details/org.telegram.desktop)
+---
 
-## Old system versions
+<img src="docs/assets/hero.png" alt="Katsuki Desktop mockup — profile, record shelf, floating glass player, macOS dock" width="100%"/>
 
-Version **4.9.9** was the last that supports older systems
+---
 
-* [macOS 10.12](https://updates.tdesktop.com/tmac/tsetup.4.9.9.dmg)
-* [Linux with glibc < 2.28 static build](https://updates.tdesktop.com/tlinux/tsetup.4.9.9.tar.xz)
+## 💢 Why another Telegram client?
 
-Version **2.4.4** was the last that supports older systems
+Every existing fork reskins the same settings-list profile. Katsuki rebuilds the parts that actually say something about you — around **music**.
 
-* [OS X 10.10 and 10.11](https://updates.tdesktop.com/tosx/tsetup-osx.2.4.4.dmg)
-* [Linux static build for 32 bit](https://updates.tdesktop.com/tlinux32/tsetup32.2.4.4.tar.xz)
+### 1 · 🪩 The Sound Identity Card *(profile, reinvented)*
 
-Version **1.8.15** was the last that supports older systems
+No fork has ever done this: the profile isn't a list of info rows — it's a **personal music space**.
 
-* [Windows XP and Vista](https://updates.tdesktop.com/tsetup/tsetup.1.8.15.exe) ([portable](https://updates.tdesktop.com/tsetup/tportable.1.8.15.zip))
-* [OS X 10.8 and 10.9](https://updates.tdesktop.com/tmac/tsetup.1.8.15.dmg)
-* [OS X 10.6 and 10.7](https://updates.tdesktop.com/tmac32/tsetup32.1.8.15.dmg)
+- **Full-bleed ambient cover** — gradient mesh derived from the avatar, textured with a live audio waveform
+- **"Listening now" badge** — animated equalizer + current track, right on the profile
+- **Stat chips** instead of plain rows — mutual groups, shared media, files, tracks, premium
+- Squircle avatar, glass action buttons, macOS typography rhythm
 
-## Third-party
+### 2 · 💿 The Record Shelf *(playlists, reinvented)*
 
-* Qt 6 ([LGPL](http://doc.qt.io/qt-6/lgpl.html)) and Qt 5.15 ([LGPL](http://doc.qt.io/qt-5/lgpl.html)) slightly patched
-* OpenSSL 3.2.1 ([Apache License 2.0](https://openssl-library.org/source/license/apache-license-2.0.txt))
-* WebRTC ([New BSD License](https://github.com/desktop-app/tg_owt/blob/master/LICENSE))
-* zlib ([zlib License](http://www.zlib.net/zlib_license.html))
-* LZMA SDK 9.20 ([public domain](http://www.7-zip.org/sdk.html))
-* liblzma ([public domain](http://tukaani.org/xz/))
-* Google Breakpad ([License](https://chromium.googlesource.com/breakpad/breakpad/+/master/LICENSE))
-* Google Crashpad ([Apache License 2.0](https://chromium.googlesource.com/crashpad/crashpad/+/master/LICENSE))
-* GYP ([BSD License](https://github.com/bnoordhuis/gyp/blob/master/LICENSE))
-* Ninja ([Apache License 2.0](https://github.com/ninja-build/ninja/blob/master/COPYING))
-* OpenAL Soft ([LGPL](https://github.com/kcat/openal-soft/blob/master/COPYING))
-* Opus codec ([BSD License](http://www.opus-codec.org/license/))
-* FFmpeg ([LGPL](https://www.ffmpeg.org/legal.html))
-* Guideline Support Library ([MIT License](https://github.com/Microsoft/GSL/blob/master/LICENSE))
-* Range-v3 ([Boost License](https://github.com/ericniebler/range-v3/blob/master/LICENSE.txt))
-* Open Sans font ([Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0.html))
-* Vazirmatn font ([SIL Open Font License 1.1](https://github.com/rastikerdar/vazirmatn/blob/master/OFL.txt))
-* Emoji alpha codes ([MIT License](https://github.com/emojione/emojione/blob/master/extras/alpha-codes/LICENSE.md))
-* xxHash ([BSD License](https://github.com/Cyan4973/xxHash/blob/dev/LICENSE))
-* QR Code generator ([MIT License](https://github.com/nayuki/QR-Code-generator#license))
-* CMake ([New BSD License](https://github.com/Kitware/CMake/blob/master/Copyright.txt))
-* Hunspell ([LGPL](https://github.com/hunspell/hunspell/blob/master/COPYING.LESSER))
-* Ada ([Apache License 2.0](https://github.com/ada-url/ada/blob/main/LICENSE-APACHE))
+Playlists rendered as **vinyl records peeking out of album sleeves** — nobody has ever done this in a Telegram client.
 
-## Build instructions
+- Hover a sleeve → the disc **slides out** with spring physics; the playing one **spins forever**
+- Live playback position printed under each sleeve (`▶ 3:24 / 4:01`)
+- **Now Spinning** rail — giant rotating vinyl with label art + live tracklist
 
-* [Windows (32-bit and 64-bit)][win]
-* [macOS][mac]
-* [GNU/Linux using Docker][linux]
+### 3 · 🎛️ The floating glass player *(player, reinvented)*
 
-[//]: # (LINKS)
-[telegram]: https://telegram.org
-[telegram_desktop]: https://desktop.telegram.org
-[telegram_api]: https://core.telegram.org
-[telegram_proto]: https://core.telegram.org/mtproto
-[license]: LICENSE
-[win]: docs/building-win.md
-[mac]: docs/building-mac.md
-[linux]: docs/building-linux.md
-[preview_image]: https://github.com/telegramdesktop/tdesktop/blob/dev/docs/assets/preview.png "Preview of Telegram Desktop"
-[preview_image_url]: https://raw.githubusercontent.com/telegramdesktop/tdesktop/dev/docs/assets/preview.png
+Not a corner toolbar — a **floating glass capsule** with a mini spinning vinyl, full transport controls, volume, and a **SoundCloud-style waveform scrubber** (played bars light up as the track moves).
 
-## Thanks to
+### 4 · 🖥️ The macOS dock *(on Windows, Linux, everywhere)*
 
-<a href="https://depot.dev">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://depot.dev/assets/brand/1693758816/depot-logo-horizontal-on-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="https://depot.dev/assets/brand/1693758816/depot-logo-horizontal-on-light.svg">
-    <img alt="Depot" src="https://depot.dev/assets/brand/1693758816/depot-logo-horizontal-on-light.svg" width="150">
-  </picture>
-</a>
+A floating glass dock at the bottom — Chats · Contacts · Calls · Music · Settings — with authentic **macOS hover magnification**, gradient active tile, and traffic-light window chrome.
 
-CI infrastructure sponsored by [Depot](https://depot.dev) — fast GitHub Actions runners.
+---
 
+## 🎨 Design language — "Sound Glass"
+
+Everything floats. Nothing is flat. Dark-native by default.
+
+| Token | Value | Role |
+|---|---|---|
+| Base | `#0A0B0F` | deep neutral canvas |
+| Glass | `rgba(255,255,255,.055)` + blur | every panel |
+| Accent | `#7C5CFF → #4EA8FF` | gradient primary |
+| Live | `#3ED598` | "listening now" |
+| Radius | 26 / 18 / 12 px | rounded-everything |
+| Type | Manrope + Inter | SF-substitute rhythm |
+
+![base](https://img.shields.io/badge/-base%200A0B0F-0A0B0F)
+![glass](https://img.shields.io/badge/-glass%20ffffff0e-3A3D4A)
+![accent](https://img.shields.io/badge/-accent%207C5CFF-7C5CFF)
+![accent](https://img.shields.io/badge/-accent%204EA8FF-4EA8FF)
+![live](https://img.shields.io/badge/-live%203ED598-3ED598)
+
+A light variant — **"Sound Paper"** — ships later via the token system (nothing hardcoded).
+
+---
+
+## 🗺️ Roadmap
+
+- [x] Phase 0 — repo, CI, provenance
+- [x] Phase 1 — design tokens + waveform scrubber widget
+- [ ] Phase 2 — theme system in `style/` + `lib_ui` (glass materials)
+- [ ] Phase 3 — dock + traffic-light titlebar
+- [ ] Phase 4 — floating glass player
+- [ ] Phase 5 — Sound Identity Card (profile)
+- [ ] Phase 6 — Record Shelf + Now Spinning
+- [ ] Phase 7 — polish: springs, spin, reduced-motion, RTL, light theme
+
+---
+
+## 🛠️ Building
+
+Built on the [Telegram Desktop](https://github.com/telegramdesktop/tdesktop) codebase (~10M lines of C++/Qt). CI does the heavy lifting; local builds need the usual tdesktop toolchain (Qt 6, CMake, Ninja, C++20).
+
+```bash
+git clone https://github.com/haerin-tg/katsuki-desktop.git
+cd katsuki-desktop
+# set your API credentials (see below), then the standard tdesktop CMake flow
+```
+
+**API credentials:** Telegram requires every client to have its own `api_id` / `api_hash` — get them free at [my.telegram.org](https://my.telegram.org) (*API development tools*). Development builds use tdesktop's public **test credentials** (`TDESKTOP_API_TEST=ON`); release builds need your real keys as CI secrets.
+
+> ⚠️ **Heads-up:** third-party clients carry account risk. Use a test account while tinkering, and don't do anything against the Telegram ToS.
+
+---
+
+## 🙏 Credits
+
+- **[Telegram Desktop](https://github.com/telegramdesktop/tdesktop)** — the codebase this all stands on. Thank you.
+- **[AyuGram](https://github.com/AyuGram/AyuGramDesktop)** & friends — proof that a fork can have a soul
+- **[Solaricons](https://www.480.design/solaricons)** by 480.design — the icon set *(license under review for redistribution)*
+- Everyone who ever said *"I wish the profile looked like a record store"*
+
+---
+
+## 📜 License
+
+[GPL-3.0](LICENSE) — same as Telegram Desktop. Keep the license and copyright notices, and you're golden.
+
+*Not affiliated with Telegram Messenger Inc. "Telegram" is a trademark of Telegram Messenger Inc.*

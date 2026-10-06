@@ -1,16 +1,16 @@
 /*
-Astra UI — waveform scrubber widget.
-Part of the Astra UI redesign for this Telegram Desktop fork.
+Katsuki UI — waveform scrubber widget.
+Part of the Katsuki UI redesign for this Telegram Desktop fork.
 */
-#include "astra/astra_waveform.h"
+#include "katsuki/katsuki_waveform.h"
 
-#include "astra/astra_design.h"
+#include "katsuki/katsuki_design.h"
 
 #include <QPainter>
 #include <QPainterPath>
 #include <QMouseEvent>
 
-namespace Astra {
+namespace Katsuki {
 namespace {
 
 constexpr auto kBarRadius = 0.6;
@@ -123,4 +123,4 @@ void WaveformWidget::paintEvent(QPaintEvent *e) {
 	}
 }
 
-} // namespace Astra
+} // namespace Katsuki

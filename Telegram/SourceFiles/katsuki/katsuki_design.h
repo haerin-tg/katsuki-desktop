@@ -1,7 +1,7 @@
-// Astra UI — Sound Glass design system.
+// Katsuki UI — Sound Glass design system.
 /*
-Astra UI — design tokens ("Sound Glass").
-Part of the Astra UI redesign for this Telegram Desktop fork.
+Katsuki UI — design tokens ("Sound Glass").
+Part of the Katsuki UI redesign for this Telegram Desktop fork.
 */
 #pragma once
 
@@ -9,7 +9,7 @@ Part of the Astra UI redesign for this Telegram Desktop fork.
 #include <QGradient>
 #include <QLinearGradient>
 
-namespace Astra {
+namespace Katsuki {
 namespace Design {
 
 // ============ radii ============
@@ -88,4 +88,4 @@ inline QColor VinylGroove() { return QColor(0x17, 0x18, 0x1F); }
 inline QColor VinylLabel(QColor accent) { return accent; }
 
 } // namespace Design
-} // namespace Astra
+} // namespace Katsuki

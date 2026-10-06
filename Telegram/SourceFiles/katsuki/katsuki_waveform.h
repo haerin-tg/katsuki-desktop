@@ -1,7 +1,7 @@
-// Astra UI module.
+// Katsuki UI module.
 /*
-Astra UI — waveform scrubber widget ("Sound Glass" player).
-Part of the Astra UI redesign for this Telegram Desktop fork.
+Katsuki UI — waveform scrubber widget ("Sound Glass" player).
+Part of the Katsuki UI redesign for this Telegram Desktop fork.
 
 Renders per-track audio peaks as rounded bars; the played portion is
 accent-colored, the rest muted. Click/drag emits a seek fraction.
@@ -13,7 +13,7 @@ accent-colored, the rest muted. Click/drag emits a seek fraction.
 #include <vector>
 #include <functional>
 
-namespace Astra {
+namespace Katsuki {
 
 class WaveformWidget final : public Ui::RpWidget {
 public:
@@ -46,4 +46,4 @@ private:
 	QColor _tickColor;
 };
 
-} // namespace Astra
+} // namespace Katsuki

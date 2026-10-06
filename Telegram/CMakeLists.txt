@@ -135,6 +135,9 @@ PRIVATE
     api/api_cloud_password.h
     api/api_communities.cpp
     api/api_communities.h
+    katsuki/katsuki_design.h
+    katsuki/katsuki_waveform.cpp
+    katsuki/katsuki_waveform.h
     data/data_search_calendar.h
     data/data_search_calendar.cpp
     api/api_common.cpp

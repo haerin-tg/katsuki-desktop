@@ -146,6 +146,19 @@ README banner = **typography lockup**: heavy sans `KATSU` + outlined `KI` + Geor
 5. MD3 vocabulary (slider/segmented/chips/FAB/list/type scale) in anything music-related.
 6. Profiles stay TG-honest: person info first, one song card, no library sections.
 
+## Implementation status
+
+Code lives in `Telegram/SourceFiles/katsuki/` (branch `katsuki-ui`, merged to `dev`). Token numbers & verification details in [`raw.md`](raw.md) §8.
+
+| Piece | Status |
+|---|---|
+| **Design token system v2** (`katsuki_design.h`) | ✅ landed — flat palette, MD3 player color roles, shape/radius/type/space scales, `Active` theme alias (Light), Qt bridge |
+| **Waveform scrubber** (`katsuki_waveform.{h,cpp}`) | ✅ reworked onto v2 tokens (optional scrubber skin; MD3 slider is the primary control) |
+| Profile UI (hero + compact, song card, channel card, tab pill) | ⬜ next — `katsuki/profile/` |
+| Playlist sheet + song-card variants | ⬜ — `katsuki/music/` |
+| MD3 player + mini bar | ⬜ — `KatsukiPlayerBar` |
+| Theme → `.style` / `lib_ui` mapping | ⬜ — light first |
+
 ## Assets
 
 | File | What |

@@ -100,7 +100,7 @@ cd katsuki-desktop
 
 - **[Telegram Desktop](https://github.com/telegramdesktop/tdesktop)** — the codebase this all stands on. Thank you.
 - **[AyuGram](https://github.com/AyuGram/AyuGramDesktop)** & friends — proof that a fork can have a soul
-- **[RabbitGram](https://github.com/rabbitgram)** — the rounding inspiration
+- **[RabbitGram](https://github.com/rabbitgramdesktop/rabbitgramdesktop)** — the rounding inspiration
 - **[Geist](https://vercel.com/font)** by Vercel — the type system
 - **[Material Design 3](https://m3.material.io)** — the player's component vocabulary
 

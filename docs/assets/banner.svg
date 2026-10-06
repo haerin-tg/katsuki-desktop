@@ -73,5 +73,5 @@
   <rect x="92" y="216" width="330" height="2" rx="1" fill="url(#accentSoft)" opacity="0.85"/>
 
   <!-- tagline -->
-  <text x="92" y="252" font-family="Inter, 'SF Pro Display', 'Segoe UI', Helvetica, Arial, sans-serif" font-size="19" font-weight="500" fill="#8B91A5">a music-first Telegram client · Sound Glass design language</text>
+  <text x="92" y="252" font-family="Inter, 'SF Pro Display', 'Segoe UI', Helvetica, Arial, sans-serif" font-size="19" font-weight="500" fill="#8B91A5">a music-first Telegram client · flat · rounded · material</text>
 </svg>

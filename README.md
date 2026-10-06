@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/assets/banner.svg" alt="Katsuki Desktop — a music-first Telegram client with the Sound Glass design language" width="100%"/>
+<img src="docs/assets/banner.svg" alt="Katsuki Desktop — a music-first Telegram client. Flat, rounded, material." width="100%"/>
 
 <br/>
 
@@ -12,80 +12,71 @@
 
 **A Telegram Desktop client where your profile is a listening room.** 💿
 
-*勝 — "victory". Built for people who think a chat client should feel like an album.*
+*勝 — "victory". Flat surfaces, round shapes, one accent color, real Material 3 player.*
 
 </div>
 
 ---
 
-<img src="docs/assets/hero.png" alt="Katsuki Desktop mockup — profile, record shelf, floating glass player, macOS dock" width="100%"/>
+<img src="docs/assets/hero.png" alt="Katsuki Desktop mockup — flat profile with song card" width="100%"/>
 
 ---
 
 ## 💢 Why another Telegram client?
 
-Every existing fork reskins the same settings-list profile. Katsuki rebuilds the parts that actually say something about you — around **music**.
+Every fork reskins the same thing. Katsuki rebuilds the parts that say something about you — around **music** — while keeping the look **flat and Telegram-honest**: solid fills, RabbitGram-style rounding, Geist type. No glassmorphism. Ever.
 
-### 1 · 🪩 The Sound Identity Card *(profile, reinvented)*
+### 1 · Profile, honest and new
 
-No fork has ever done this: the profile isn't a list of info rows — it's a **personal music space**.
+A profile shows a *person*, not a library. Rounded-square avatar, name, handle, a quiet **"listening now"** pill, pill action row, and clean rounded info rows — familiar bones, brand-new composition.
 
-- **Full-bleed ambient cover** — gradient mesh derived from the avatar, textured with a live audio waveform
-- **"Listening now" badge** — animated equalizer + current track, right on the profile
-- **Stat chips** instead of plain rows — mutual groups, shared media, files, tracks, premium
-- Squircle avatar, glass action buttons, macOS typography rhythm
+### 2 · The song card
 
-### 2 · 💿 The Record Shelf *(playlists, reinvented)*
+No tiny name/artist pill. The profile carries **one designed card**: cover thumbnail + title + artist inside a wide rounded pill with a flat, single-hue background design. Clicking it opens the whole playlist.
 
-Playlists rendered as **vinyl records peeking out of album sleeves** — nobody has ever done this in a Telegram client.
+### 3 · The playlist sheet
 
-- Hover a sleeve → the disc **slides out** with spring physics; the playing one **spins forever**
-- Live playback position printed under each sleeve (`▶ 3:24 / 4:01`)
-- **Now Spinning** rail — giant rotating vinyl with label art + live tracklist
+Click the song → the playlist reveals: album art, `24 tracks · 1h 32m`, **Play all**, and a numbered track list with the playing row highlighted. Flat sheet, big rounding.
 
-### 3 · 🎛️ The floating glass player *(player, reinvented)*
+### 4 · A real Material 3 player
 
-Not a corner toolbar — a **floating glass capsule** with a mini spinning vinyl, full transport controls, volume, and a **SoundCloud-style waveform scrubber** (played bars light up as the track moves).
-
-### 4 · 🖥️ The macOS dock *(on Windows, Linux, everywhere)*
-
-A floating glass dock at the bottom — Chats · Contacts · Calls · Music · Settings — with authentic **macOS hover magnification**, gradient active tile, and traffic-light window chrome.
+Not "round corners = MD3". The player uses the actual MD3 system: type scale (headline-small title), the 4px/20px MD3 slider, segmented repeat modes, assist chip for output device, circular FAB + tonal icon buttons, MD3 list items — plus a mini player bar.
 
 ---
 
-## 🎨 Design language — "Sound Glass"
+## 🎨 Design system
 
-Everything floats. Nothing is flat. Dark-native by default.
+**Flat. Round. Honest.** Full spec in [`design.md`](design.md) · engineering notes in [`raw.md`](raw.md) · mockups in [`docs/design-mockups/`](docs/design-mockups).
 
 | Token | Value | Role |
 |---|---|---|
-| Base | `#0A0B0F` | deep neutral canvas |
-| Glass | `rgba(255,255,255,.055)` + blur | every panel |
-| Accent | `#7C5CFF → #4EA8FF` | gradient primary |
-| Live | `#3ED598` | "listening now" |
-| Radius | 26 / 18 / 12 px | rounded-everything |
-| Type | Manrope + Inter | SF-substitute rhythm |
+| Base | `#FFFFFF` / canvas `#E9EBEF` | flat surfaces |
+| Accent | `#3390EC` | the only color |
+| Accent tints | `#E7F1FD` / `#D3E5F9` | card backgrounds, chips |
+| Text | `#111418` / `#656D76` | one dark, one gray |
+| Radius | 14 / 18 / 24 / 28 / pill | everything round |
+| Type | Geist + Geist Mono | Vercel's type system |
+| Player | Material 3 shape + type scale | MD3 done properly |
 
-![base](https://img.shields.io/badge/-base%200A0B0F-0A0B0F)
-![glass](https://img.shields.io/badge/-glass%20ffffff0e-3A3D4A)
-![accent](https://img.shields.io/badge/-accent%207C5CFF-7C5CFF)
-![accent](https://img.shields.io/badge/-accent%204EA8FF-4EA8FF)
-![live](https://img.shields.io/badge/-live%203ED598-3ED598)
-
-A light variant — **"Sound Paper"** — ships later via the token system (nothing hardcoded).
+![bg](https://img.shields.io/badge/-bg%20FFFFFF-FFFFFF)
+![canvas](https://img.shields.io/badge/-canvas%20E9EBEF-E9EBEF)
+![text](https://img.shields.io/badge/-text%20111418-111418)
+![accent](https://img.shields.io/badge/-accent%203390EC-3390EC)
+![tint](https://img.shields.io/badge/-tint%20E7F1FD-E7F1FD)
 
 ---
 
 ## 🗺️ Roadmap
 
+- [x] Design direction locked — flat / rounded / MD3 / Geist
+- [x] Profile mockups (A centered · B compact), song cards, playlist sheet, MD3 player
 - [x] Phase 0 — repo, CI, provenance
-- [x] Phase 1 — design tokens + waveform scrubber widget
-- [ ] Phase 2 — theme system in `style/` + `lib_ui` (glass materials)
-- [ ] Phase 3 — dock + traffic-light titlebar
-- [ ] Phase 4 — floating glass player
-- [ ] Phase 5 — Sound Identity Card (profile)
-- [ ] Phase 6 — Record Shelf + Now Spinning
-- [ ] Phase 7 — polish: springs, spin, reduced-motion, RTL, light theme
+- [x] Phase 1 — design tokens + waveform scrubber widget (needs v2 token rework)
+- [ ] Theme system in `style/` + `lib_ui` with the v2 tokens
+- [ ] Profile UI in tdesktop (`astra/profile`)
+- [ ] Song card + playlist sheet
+- [ ] MD3 player + mini player
+- [ ] Polish: dark theme, hover states, reduced-motion, RTL
 
 ---
 
@@ -109,8 +100,9 @@ cd katsuki-desktop
 
 - **[Telegram Desktop](https://github.com/telegramdesktop/tdesktop)** — the codebase this all stands on. Thank you.
 - **[AyuGram](https://github.com/AyuGram/AyuGramDesktop)** & friends — proof that a fork can have a soul
-- **[Solaricons](https://www.480.design/solaricons)** by 480.design — the icon set *(license under review for redistribution)*
-- Everyone who ever said *"I wish the profile looked like a record store"*
+- **[RabbitGram](https://github.com/rabbitgram)** — the rounding inspiration
+- **[Geist](https://vercel.com/font)** by Vercel — the type system
+- **[Material Design 3](https://m3.material.io)** — the player's component vocabulary
 
 ---
 

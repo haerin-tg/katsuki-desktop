@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Katsuki · Song card — designed pill container</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF;--canvas:#E9EBEF;--subtle:#F3F4F6;--border:#E6E8EB;
+    --text:#111418;--text-2:#656D76;
+    --accent:#3390EC;--accent-soft:#E7F1FD;--accent-tint:#D3E5F9;
+    --r-m:14px;--r-l:18px;--r-xl:24px;--r-pill:999px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Geist',-apple-system,'Segoe UI',sans-serif;color:var(--text);
+    background:var(--canvas);-webkit-font-smoothing:antialiased;letter-spacing:-0.011em;
+    padding:36px;
+  }
+  .label{
+    font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:#8A919B;margin-bottom:22px;display:flex;gap:14px;align-items:center;
+  }
+  .label b{color:#5B626C;font-weight:500}
+  .label .dot{width:5px;height:5px;border-radius:50%;background:var(--accent)}
+  .sub{font-size:13px;color:var(--text-2);margin:-14px 0 22px}
+
+  .stack{display:flex;flex-direction:column;gap:18px;width:480px}
+
+  .song-card{
+    position:relative;height:92px;border-radius:26px;overflow:hidden;
+    display:flex;align-items:center;gap:15px;padding:0 18px;
+  }
+
+  /* cover */
+  .disc{
+    width:60px;height:60px;border-radius:16px;flex:none;position:relative;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .disc .vinyl{width:34px;height:34px;border-radius:50%;position:relative}
+  .disc .vinyl::after{content:"";position:absolute;inset:11px;border-radius:50%}
+
+  /* text */
+  .meta{flex:1;min-width:0;position:relative;z-index:1}
+  .meta .t{font-size:16px;font-weight:600;letter-spacing:-0.018em;white-space:nowrap}
+  .meta .a{font-size:13px;margin-top:3px;display:flex;align-items:center;gap:8px}
+  .meta .a .time{font-family:'Geist Mono',monospace;font-size:11px}
+
+  .play{
+    width:46px;height:46px;border-radius:50%;flex:none;z-index:1;
+    display:flex;align-items:center;justify-content:center;
+  }
+
+  /* ============ VARIANT A — accent tint + vinyl-slice motif ============ */
+  .v-a{background:var(--accent-soft)}
+  .v-a .slices{position:absolute;right:96px;top:0;bottom:0;display:flex;align-items:center;gap:9px}
+  .v-a .slices i{width:10px;border-radius:var(--r-pill);background:var(--accent-tint)}
+  .v-a .slices i:nth-child(1){height:26px}.v-a .slices i:nth-child(2){height:52px}
+  .v-a .slices i:nth-child(3){height:36px}.v-a .slices i:nth-child(4){height:60px}
+  .v-a .slices i:nth-child(5){height:30px}
+  .v-a .disc{background:#C9DFF7}
+  .v-a .disc .vinyl{background:#8FB9E8}
+  .v-a .disc .vinyl::after{background:#C9DFF7}
+  .v-a .t{color:#0E1420}
+  .v-a .a{color:#4A6B92}
+  .v-a .a .time{color:#6E8DB2}
+  .v-a .a .time::before{content:"";display:inline-block;width:3px;height:3px;border-radius:50%;background:#9DB9D8;margin:0 8px 2px 0}
+  .v-a .play{background:var(--accent)}
+
+  /* ============ VARIANT B — flat diagonal stripe pattern ============ */
+  .v-b{
+    background:
+      repeating-linear-gradient(125deg,#F2F4F7 0 14px,#E9ECF1 14px 28px);
+  }
+  .v-b .disc{background:#DDE3EA}
+  .v-b .disc .vinyl{background:#AAB6C4}
+  .v-b .disc .vinyl::after{background:#DDE3EA}
+  .v-b .t{color:#0E1420}
+  .v-b .a{color:#5A636E}
+  .v-b .a .time{color:#828B96}
+  .v-b .play{background:var(--text)}
+
+  /* ============ VARIANT C — dot grid + big cropped disc ============ */
+  .v-c{
+    background:
+      radial-gradient(#CBDCF2 1.5px, transparent 1.6px) 0 0/14px 14px,
+      var(--accent-soft);
+  }
+  .v-c .bigdisc{
+    position:absolute;right:26px;top:-34px;width:150px;height:150px;border-radius:50%;
+    background:#D9E8FA;
+  }
+  .v-c .bigdisc::after{content:"";position:absolute;inset:56px;border-radius:50%;background:var(--accent-soft)}
+  .v-c .disc{background:#C9DFF7}
+  .v-c .disc .vinyl{background:#8FB9E8}
+  .v-c .disc .vinyl::after{background:#C9DFF7}
+  .v-c .t{color:#0E1420}
+  .v-c .a{color:#4A6B92}
+  .v-c .a .time{color:#6E8DB2}
+  .v-c .play{background:var(--accent)}
+
+  .tag{
+    position:absolute;top:10px;left:14px;z-index:2;
+    font-family:'Geist Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+    background:rgba(255,255,255,.8);color:#54606F;padding:3px 8px;border-radius:var(--r-pill);
+    font-weight:500;
+  }
+</style>
+</head>
+<body>
+
+<div class="label"><span class="dot"></span><b>Katsuki / Song card</b> · thumbnail + title + artist · designed pill background</div>
+<div class="sub">The “holding pill” gets a real background design — flat, single-hue, no glass. Three directions below.</div>
+
+<div class="stack">
+
+  <!-- A -->
+  <div class="song-card v-a">
+    <div class="tag">A · vinyl slices</div>
+    <div class="slices"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="disc"><div class="vinyl"></div></div>
+    <div class="meta">
+      <div class="t">Moonlight Drive</div>
+      <div class="a">Nova Lane<span class="time">3:24</span></div>
+    </div>
+    <div class="play">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13l11-6.5z"/></svg>
+    </div>
+  </div>
+
+  <!-- B -->
+  <div class="song-card v-b">
+    <div class="tag">B · flat stripes</div>
+    <div class="disc"><div class="vinyl"></div></div>
+    <div class="meta">
+      <div class="t">Slow Motion</div>
+      <div class="a">The Paper Kites<span class="time">4:02</span></div>
+    </div>
+    <div class="play">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13l11-6.5z"/></svg>
+    </div>
+  </div>
+
+  <!-- C -->
+  <div class="song-card v-c">
+    <div class="tag">C · dot grid + disc</div>
+    <div class="bigdisc"></div>
+    <div class="disc"><div class="vinyl"></div></div>
+    <div class="meta">
+      <div class="t">Afterglow</div>
+      <div class="a">Nova Lane<span class="time">2:58</span></div>
+    </div>
+    <div class="play">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13l11-6.5z"/></svg>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

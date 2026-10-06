@@ -1,10 +1,12 @@
 // Katsuki UI module.
 /*
-Katsuki UI — waveform scrubber widget ("Sound Glass" player).
+Katsuki UI — waveform scrubber widget.
 Part of the Katsuki UI redesign for this Telegram Desktop fork.
 
 Renders per-track audio peaks as rounded bars; the played portion is
 accent-colored, the rest muted. Click/drag emits a seek fraction.
+Colors default to the v2 tokens (katsuki_design.h); the MD3 slider is the
+primary player control, this widget is the optional scrubber skin.
 */
 #pragma once
 

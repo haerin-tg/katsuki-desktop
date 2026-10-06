@@ -20,9 +20,9 @@ constexpr auto kBarWidthFraction = 1.1; // % of widget width per bar
 
 WaveformWidget::WaveformWidget(QWidget *parent)
 : Ui::RpWidget(parent)
-, _playedColor(Design::Active::WavePlayed())
-, _unplayedColor(Design::Active::WaveUnplayed())
-, _tickColor(Design::Active::WaveTick()) {
+, _playedColor(Design::Qt::WavePlayed())
+, _unplayedColor(Design::Qt::WaveUnplayed())
+, _tickColor(Design::Qt::WaveTick()) {
 	setCursor(Qt::PointingHandCursor);
 	setAttribute(Qt::WA_OpaquePaintEvent, false);
 }

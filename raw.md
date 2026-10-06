@@ -77,7 +77,7 @@ background:
 
 | Feature | Where |
 |---|---|
-| Design tokens | `Telegram/SourceFiles/katsuki/katsuki_design.h` (exists — **needs rework to v2 tokens**, drop glass values) |
+| Design tokens | `Telegram/SourceFiles/katsuki/katsuki_design.h` — **✅ v2 token system landed** (flat palette, MD3 player roles, shape/radius/type scales, `Active` theme alias; see §8) |
 | Waveform widget | `katsuki_waveform.{h,cpp}` (exists — keep for player scrubber later; MD3 slider is the primary control) |
 | Profile UI | `Telegram/SourceFiles/boxes/profile/` → new `katsuki/profile/` module (KatsukiProfileBox) |
 | Song card / playlist sheet / channel card | new `katsuki/music/` widgets (custom `RpWidget` painters) |
@@ -112,3 +112,32 @@ Build registration: every new `.cpp` must be added to `Telegram/CMakeLists.txt` 
 - [ ] Name/branding details (client name confirmed: **Katsuki Desktop**)
 - [ ] Solaricons license verification before shipping icons
 - [ ] Real api_id/api_hash as CI secrets (release builds only)
+
+## 8 · Implementation log
+
+### 2026-10-07 — v2 design token system (first real code step)
+
+**Files changed** (branch `katsuki-ui`, `Telegram/SourceFiles/katsuki/`):
+
+1. `katsuki_design.h` — rewritten as the v2 token system. All "Sound Glass" values are gone.
+   - **Token core is pure `constexpr` C++ (no Qt):** `struct Rgba` + `Rgb(hex)` helper, verifiable outside the tdesktop build.
+   - `Shape` — MD3 shape scale 8/12/16/20/28/999 (player).
+   - `Radius` — product scale 14/18/24/28/999 (design.md “everything round”).
+   - `Type` — MD3-named type scale (24/22/16/14/12.5/11 px, weights 400/500/600), `kFontFamily="Geist"`, `kFontMono="Geist Mono"`, letter-spacing constants.
+   - `Space` — 4px base grid (4/8/12/16/20/24).
+   - `Light` — flat v2 palette exactly per §1 (`kBg/kCanvas/kSubtle/kBorder/kText/kText2/kAccent/kAccentSoft/kAccentTint`), plus `kOnAccentSoft #2374CC`, `kInitials #2A72C4`, `kPfpBg #DCE0E6`, `kPfpText #5A636E`; nested `Light::M3` = all MD3 color roles per §1.
+   - `Active` = namespace alias → `Light`. Components must use `Active`; when the dark scheme is designed (§7), only the alias target changes.
+   - **Qt bridge** (`KATSUKI_DESIGN_HAS_QT_COLOR`): `ToQColor(Rgba)` + `Design::Qt::` accessors, compiled only when `<QColor>` is available.
+   - Waveform colors (provisional): played = `M3::kPrimary`, unplayed = `M3::kSecondaryContainer`, tick = `M3::kOnPrimaryContainer`. MD3 slider remains the primary control.
+2. `katsuki_waveform.cpp` — constructor now pulls defaults from `Design::Qt::Wave*()` (was `Design::Active::Wave*()` glass-era accessors, removed). `setBarColors()` override API unchanged.
+3. `katsuki_waveform.h` — comment updated (drops "Sound Glass").
+4. `Telegram/CMakeLists.txt` — unchanged; `katsuki/` entries already registered.
+
+**Verification (local, before push):**
+- `g++ -std=c++17 -Wall -Wextra -Werror` syntax + codegen on the header with **30+ `static_assert`s pinning every token to the §1 values** — passes.
+- Qt-bridge smoke test with a stub `QColor` (accents resolve to `rgba(51,144,236,255)`, wave played `rgba(46,124,214,255)`) — passes.
+- Test files live in the workspace (`.openclaw/tmp/token_test.cpp`), intentionally **not** committed — CI compiles the real thing with real Qt.
+
+**Branch note:** `katsuki-ui` was reconciled with `dev` first (merged) — the katsuki module now exists on top of the latest design docs; this removes the drift where `dev` had newer docs but no code and `katsuki-ui` had code on stale docs.
+
+**Next up (roadmap order):** theme → `.style`/`lib_ui` mapping, then `katsuki/profile/` (profile box: hero + compact variants, song card, channel card, info rows, profile tab pill), then `katsuki/music/` + `KatsukiPlayerBar` (MD3).

@@ -28,9 +28,9 @@ Fonts: `Geist` 400/500/600/700 + `Geist Mono` 400/500 via Google Fonts. Base let
 ## 2 · Component measurements
 
 **Profile panel:** 412px wide, outer r24, 1px border. Topbar: 36px icon buttons r999.
-- A: avatar 124² r36 (initials 42/600 `#2A72C4` on `--accent-soft`), name 22/600, handle 13.5, status pill h≈26 (5×11 padding, 12px text, 6px live dot).
-- B: avatar 82² r26 (initials 28/600), name 19/600, sub 13, bio tile: `--subtle` r14, 13.5/1.5.
-- Action row: h44 pills, gap 9, padding 0 20; Message flex 2.2, Call flex 1.1, ··· fixed 50.
+- A: avatar 124² **circle** (initials 42/600 `#2A72C4` on `--accent-soft`), name 22/600, no handle, "last seen recently" pill h≈26 (5×11 padding, 12px, `--subtle` bg / `--text-2` — neutral, no live dot).
+- B: avatar 82² **circle** (initials 28/600), name 19/600, sub 13 "last seen recently" (no status pill), bio tile: `--subtle` r14, 13.5/1.5.
+- Action row: h44 pills, gap 9, padding 0 20; Message flex 2.2 (accent), Call flex 1.1 (tonal), **bell/mute icon-only** fixed 50×44 tonal r999 (18px stroke-2 bell, no text label).
 - Info rows: container r18 + 1px border; row padding 12×15; icon tile 33² r10; k 12.5 / v 14/500.
 
 **Song card (A/C/D/E/F):** h84–88, r22–24, padding 0 14–16, gap 13–15.
@@ -40,7 +40,7 @@ Fonts: `Geist` 400/500/600/700 + `Geist Mono` 400/500 via Google Fonts. Base let
 - patterns: slices = 5–6 bars w9–10 r999 `--accent-tint` at right:100px; arcs = 3 circles border 10px; dots = `radial-gradient` 1.6px/14px; steps = 12px bars r6 gray; split = `linear-gradient(90deg, soft 0 62%, tint 62%)`.
 - compact row: h62 r18, thumb 42² r11, eq bars 3.5px w.
 
-**Channel card:** h62, r18, bg `--subtle`, padding 0 13, gap 11, margin-top 9 (below song card). PFP 40² r11 (initials 13.5/600 `#5A636E` on `#DCE0E6`). Name 13.5/600. Last message 12 `--text-2`, `white-space:nowrap; overflow:hidden; text-overflow:ellipsis`. Chevron 16px `#A2A9B3`. Faint slice motif (3 bars w7, `#E2E5EA`, right:44px).
+**Channel card:** h62, r18, bg `--subtle`, padding 0 13, gap 11, margin-top 9 (below song card). PFP 40² **circle** (initials 13.5/600 `#5A636E` on `#DCE0E6`). Name 13.5/600. Last message 12 `--text-2`, `white-space:nowrap; overflow:hidden; text-overflow:ellipsis` (truncated with `…`). **No chevron.** Faint slice motif (3 bars w7, `#E2E5EA`, right:16px).
 
 **Playlist sheet:** r28, grabber 38×4 `#D8DCE2`; header art 64² r18; Play all h42 pill; rows r14 padding 10×12, idx column 22px mono 11; playing row bg `--accent-soft`.
 
@@ -60,7 +60,17 @@ Fonts: `Geist` 400/500/600/700 + `Geist Mono` 400/500 via Google Fonts. Base let
 - Play button → starts track, row gets eq-bars indicator, mini player appears.
 - "listening now" pill: shown when playback active — accent-soft pill + animated eq dot.
 - Item hover states: rows → `--subtle`; list items → `--surface-c` (MD3 state layer ≈8%).
-- Channel card click (or `›`) → opens the attached channel.
+- Channel card click (anywhere on the card) → opens the attached channel.
+
+**Presentation canvas (mockup pages only, NOT product UI):**
+```css
+background:
+  radial-gradient(at 14% 10%, #FDEDF4 0%, transparent 55%),
+  radial-gradient(at 86% 6%, #FFF4E0 0%, transparent 50%),
+  radial-gradient(at 68% 96%, #EAF1FF 0%, transparent 55%),
+  radial-gradient(at 30% 80%, #F3EDFF 0%, transparent 50%),
+  linear-gradient(135deg,#FBF8F5 0%,#F7F5FB 100%);
+```
 
 ## 4 · Map to tdesktop source (implementation)
 

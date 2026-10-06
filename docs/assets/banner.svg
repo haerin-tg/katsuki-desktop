@@ -1,21 +1,34 @@
 <svg width="1200" height="380" viewBox="0 0 1200 380" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- flat canvas -->
-  <rect width="1200" height="380" rx="24" fill="#F2F4F7"/>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FDEDF4"/>
+      <stop offset="32%" stop-color="#FFF4E0"/>
+      <stop offset="64%" stop-color="#EAF1FF"/>
+      <stop offset="100%" stop-color="#F3EDFF"/>
+    </linearGradient>
+  </defs>
 
-  <!-- cropped flat accent shapes -->
-  <circle cx="1130" cy="40" r="150" fill="#E7F1FD"/>
-  <rect x="-60" y="250" width="220" height="220" rx="60" fill="#E7F1FD"/>
+  <!-- soft pastel canvas -->
+  <rect width="1200" height="380" rx="24" fill="url(#paper)"/>
 
-  <!-- wordmark -->
-  <rect x="86" y="118" width="10" height="10" rx="3" fill="#3390EC"/>
-  <text x="86" y="196" font-family="Geist, Inter, 'SF Pro Display', 'Segoe UI', Helvetica, Arial, sans-serif" font-size="84" font-weight="800" letter-spacing="6" fill="#111418">KATSUKI</text>
-  <text x="90" y="240" font-family="'Geist Mono', 'SF Mono', Menlo, Consolas, monospace" font-size="21" font-weight="500" letter-spacing="12" fill="#656D76">DESKTOP</text>
-  <rect x="88" y="262" width="330" height="3" rx="1.5" fill="#3390EC"/>
-  <text x="90" y="296" font-family="Geist, Inter, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="500" fill="#8A919B">flat · rounded · material — a music-first Telegram client</text>
+  <!-- decorative type marks -->
+  <text x="86" y="74" font-family="'Geist Mono','SF Mono',Menlo,Consolas,monospace" font-size="15" font-weight="500" letter-spacing="7" fill="#8A919B">A MUSIC-FIRST TELEGRAM CLIENT — EST. 2026</text>
+  <rect x="86" y="92" width="52" height="3" rx="1.5" fill="#3390EC"/>
+
+  <!-- wordmark: filled + outlined letters (typography decoration) -->
+  <text x="82" y="196" font-family="Geist, Inter, 'SF Pro Display', 'Segoe UI', Helvetica, Arial, sans-serif" font-size="92" font-weight="800" letter-spacing="4" fill="#111418">KATSU</text>
+  <text x="418" y="196" font-family="Geist, Inter, 'SF Pro Display', 'Segoe UI', Helvetica, Arial, sans-serif" font-size="92" font-weight="800" letter-spacing="4" fill="none" stroke="#111418" stroke-width="2.4">KI</text>
+  <text x="576" y="132" font-family="Georgia, 'Times New Roman', serif" font-size="52" font-style="italic" fill="#3390EC">*</text>
+
+  <!-- second line: serif italic + mono, two extra families -->
+  <text x="86" y="256" font-family="Georgia, 'Times New Roman', serif" font-size="54" font-style="italic" fill="#3D434C">desktop</text>
+  <text x="322" y="252" font-family="'Geist Mono','SF Mono',Menlo,Consolas,monospace" font-size="19" font-weight="500" letter-spacing="5" fill="#8A919B">/ KATSUKI UI</text>
+
+  <!-- caption row -->
+  <rect x="88" y="286" width="10" height="10" rx="3" fill="#3390EC"/>
+  <text x="112" y="296" font-family="'Geist Mono','SF Mono',Menlo,Consolas,monospace" font-size="15" font-weight="400" letter-spacing="4" fill="#656D76">FLAT · ROUNDED · MATERIAL</text>
 
   <!-- ===== flat UI composition, right ===== -->
-
-  <!-- backdrop panel -->
   <rect x="700" y="66" width="420" height="248" rx="28" fill="#FFFFFF"/>
 
   <!-- mini song card -->
@@ -31,20 +44,18 @@
   <circle cx="1074" cy="134" r="18" fill="#3390EC"/>
   <path d="M1070 127 L1080 134 L1070 141 Z" fill="#FFFFFF"/>
 
-  <!-- mini channel card -->
+  <!-- mini channel card (round pfp, no chevron) -->
   <rect x="726" y="186" width="368" height="58" rx="18" fill="#F3F4F6"/>
   <rect x="1022" y="198" width="7" height="14" rx="3.5" fill="#E2E5EA"/>
   <rect x="1035" y="193" width="7" height="24" rx="3.5" fill="#E2E5EA"/>
   <rect x="1048" y="200" width="7" height="10" rx="3.5" fill="#E2E5EA"/>
-  <rect x="742" y="195" width="40" height="40" rx="11" fill="#DCE0E6"/>
-  <rect x="754" y="208" width="16" height="5" rx="2.5" fill="#5A636E"/>
-  <rect x="752" y="216" width="20" height="5" rx="2.5" fill="#5A636E"/>
+  <circle cx="762" cy="215" r="20" fill="#DCE0E6"/>
+  <rect x="752" y="209" width="20" height="5" rx="2.5" fill="#5A636E"/>
+  <rect x="752" y="218" width="14" height="5" rx="2.5" fill="#5A636E"/>
   <rect x="794" y="201" width="100" height="9" rx="4.5" fill="#111418"/>
   <rect x="794" y="218" width="176" height="7" rx="3.5" fill="#AAB2BC"/>
-  <path d="M1066 208 L1073 215 L1066 222" stroke="#A2A9B3" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
 
   <!-- mini transport -->
-  <circle cx="878" cy="284" r="0" fill="none"/>
   <rect x="822" y="268" width="34" height="34" rx="17" fill="#F3F4F6"/>
   <path d="M836 278 L836 292 L828 285 Z" fill="#111418"/>
   <rect x="852" y="278" width="3.4" height="14" rx="1.7" fill="#111418"/>

@@ -73,10 +73,14 @@ MD3 player role mapping: `primary #2E7CD6`, `primary-container #D6E8FB`, `second
 
 Telegram bones, new composition. **No playlist tiles, no "Music" section header** — a profile shows a person, not a library.
 
-- **Variant A — centered hero:** rounded-square avatar (124², r36) → name (22/600) → `@handle` → "listening now" pill (accent-soft, live dot) → action pill row → **single song card** → **channel card** → info container (phone / username / bio rows).
-- **Variant B — compact desktop panel:** avatar (82², r26) + name/handle/status on one row, action pills, song card, bio tile (subtle, r14), info rows. Denser, tdesktop-panel feel.
+- **Variant A — centered hero:** **round** avatar (124², circle) → name (22/600) → **"last seen recently"** pill (neutral gray, same spot) → action pill row → **single song card** → **channel card** → info container (phone / username / bio rows). **No `@handle` near the name** — the username lives in the info rows.
+- **Variant B — compact desktop panel:** **round** avatar (82²) + name + "last seen recently" sub on one row, action pills, song card, channel card, bio tile (subtle, r14), info rows. Denser, tdesktop-panel feel.
 
-Action row: `Message` (accent, flex 2.2) · `Call` (tonal) · `···` (tonal square-pill).
+Action row: `Message` (accent, labeled) · `Call` (tonal, labeled) · **bell/mute (icon-only tonal, no label)**. No `···` button (the top bar already has one), no gift.
+
+**Presence rule:** Telegram has no "listening" presence — **"listening now" is killed everywhere**. Profiles show last-seen only, like real TG. (Music-activity display would be a fork-local invention; explicitly not wanted.)
+
+**PFPs are round:** profile avatar and channel pfp are **circles**. Music covers stay rounded-squares (album art, not people).
 
 **Interaction:** clicking the song card reveals the whole playlist (sheet below).
 
@@ -101,8 +105,8 @@ A profile can **attach one channel**. Same card family as the song card, but **t
 
 - Container h≈62, r18, `--subtle` background with a faint slice motif (same motif language as the song card, gray)
 - **PFP** 40² r11 (flat avatar/initials) · **channel name** 13.5/600 · **last message** 12 secondary — single line, **truncated with `…` when too long**
-- Trailing `›` chevron → opens the channel
-- Anatomy mirrors the song card (thumb + meta + affordance) at ≈0.75 scale
+- Trailing chevron **removed** — tapping anywhere on the card opens the channel
+- Anatomy mirrors the song card (thumb + meta) at ≈0.75 scale
 
 ### 4 · Playlist sheet (`music-sheet.html`)
 
@@ -127,9 +131,15 @@ System reference: buttons (primary/tonal/neutral/outline + small), chips (select
 
 ---
 
+## Presentation (mockups only — not product UI)
+
+The mockup pages sit on a **soft pastel gradient canvas** (very light pink → yellow → blue → lilac, e.g. radial pastels over `#FBF8F5`) so the white panels pop in screenshots and the README. **The product UI itself stays flat and solid** — the gradient is presentation chrome only.
+
+README banner = **typography lockup**: heavy sans `KATSU` + outlined `KI` + Georgia-italic `*` accent + italic serif `desktop` + Geist Mono captions (`/ KATSUKI UI`, `FLAT · ROUNDED · MATERIAL`), on the same pastel gradient. Fonts must be system-safe (Georgia/Menlo fallbacks) since GitHub renders SVGs without webfonts.
+
 ## Rules of the system
 
-1. Flat fills only — **no** `backdrop-filter`, blur, glow, or decorative gradient (functional patterns like dots/stripes/arcs are fine).
+1. Flat fills only — **no** `backdrop-filter`, blur, glow, or decorative gradient *in the product UI* (pastel gradients are allowed in presentation canvases; functional patterns like dots/stripes/arcs are fine).
 2. One accent color. Tints of it only.
 3. Everything rounded; pills are fully round.
 4. Geist everywhere; Mono only for data-like micro-text.

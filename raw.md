@@ -65,11 +65,12 @@ Fonts: `Geist` 400/500/600/700 + `Geist Mono` 400/500 via Google Fonts. Base let
 **Presentation canvas (mockup pages only, NOT product UI):**
 ```css
 background:
-  radial-gradient(at 14% 10%, #FDEDF4 0%, transparent 55%),
-  radial-gradient(at 86% 6%, #FFF4E0 0%, transparent 50%),
-  radial-gradient(at 68% 96%, #EAF1FF 0%, transparent 55%),
-  radial-gradient(at 30% 80%, #F3EDFF 0%, transparent 50%),
-  linear-gradient(135deg,#FBF8F5 0%,#F7F5FB 100%);
+  radial-gradient(at 12% 12%, #FFC2D8 0%, transparent 55%),
+  radial-gradient(at 88% 6%, #FFE08F 0%, transparent 50%),
+  radial-gradient(at 74% 94%, #AEC8FF 0%, transparent 55%),
+  radial-gradient(at 22% 86%, #C9B4FF 0%, transparent 52%),
+  radial-gradient(at 55% 42%, #A5E1C2 0%, transparent 48%),
+  linear-gradient(135deg,#FBEAF1 0%,#E3EAFC 100%);
 ```
 
 ## 4 · Map to tdesktop source (implementation)

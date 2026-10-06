@@ -73,8 +73,8 @@ MD3 player role mapping: `primary #2E7CD6`, `primary-container #D6E8FB`, `second
 
 Telegram bones, new composition. **No playlist tiles, no "Music" section header** — a profile shows a person, not a library.
 
-- **Variant A — centered hero:** **round** avatar (124², circle) → name (22/600) → **"last seen recently"** pill (neutral gray, same spot) → action pill row → **single song card** → **channel card** → info container (phone / username / bio rows). **No `@handle` near the name** — the username lives in the info rows.
-- **Variant B — compact desktop panel:** **round** avatar (82²) + name + "last seen recently" sub on one row, action pills, song card, channel card, bio tile (subtle, r14), info rows. Denser, tdesktop-panel feel.
+- **Variant A — centered hero:** **round** avatar (124², circle) → name (22/600) → **"last seen recently"** pill (neutral gray, same spot) → action pill row → **single song card** → **channel card** → info container (phone / username / bio rows) → **profile tab pill** below the bio (long pill: `Posts · Gifts · Media · Saved · Files · Links`, centered, `Posts` selected in an inner pill; the row may clip at the panel edge — fit what fits). **No `@handle` near the name** — the username lives in the info rows.
+- **Variant B — compact desktop panel:** **round** avatar (82²) + name + "last seen recently" sub on one row, action pills, song card, channel card, info rows **(phone / username / bio — same order as A; bio is a row, not a separate tile)**, then the same profile tab pill. **Panel height matches A** — empty white space at the bottom is fine. Denser, tdesktop-panel feel.
 
 Action row: `Message` (accent, labeled) · `Call` (tonal, labeled) · **bell/mute (icon-only tonal, no label)**. No `···` button (the top bar already has one), no gift.
 
@@ -133,7 +133,7 @@ System reference: buttons (primary/tonal/neutral/outline + small), chips (select
 
 ## Presentation (mockups only — not product UI)
 
-The mockup pages sit on a **soft pastel gradient canvas** (very light pink → yellow → blue → lilac, e.g. radial pastels over `#FBF8F5`) so the white panels pop in screenshots and the README. **The product UI itself stays flat and solid** — the gradient is presentation chrome only.
+The mockup pages sit on a **pastel gradient canvas** (pink → yellow → blue → lilac → mint radials over a soft warm base — clearly visible colors, not washed out) so the white panels pop in screenshots and the README. **The product UI itself stays flat and solid** — the gradient is presentation chrome only.
 
 README banner = **typography lockup**: heavy sans `KATSU` + outlined `KI` + Georgia-italic `*` accent + italic serif `desktop` + Geist Mono captions (`/ KATSUKI UI`, `FLAT · ROUNDED · MATERIAL`), on the same pastel gradient. Fonts must be system-safe (Georgia/Menlo fallbacks) since GitHub renders SVGs without webfonts.
 

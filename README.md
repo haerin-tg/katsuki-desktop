@@ -1,99 +1,113 @@
-# [Telegram Desktop][telegram_desktop] – Official Messenger
+<div align="center">
 
-This is the complete source code and the build instructions for the official [Telegram][telegram] messenger desktop client, based on the [Telegram API][telegram_api] and the [MTProto][telegram_proto] secure protocol.
+<img src="docs/assets/banner.svg" alt="Katsuki Desktop — a music-first Telegram client. Flat, rounded, material." width="100%"/>
 
-[![Version](https://badge.fury.io/gh/telegramdesktop%2Ftdesktop.svg)](https://github.com/telegramdesktop/tdesktop/releases)
-[![Build Status](https://github.com/telegramdesktop/tdesktop/workflows/Windows./badge.svg)](https://github.com/telegramdesktop/tdesktop/actions)
-[![Build Status](https://github.com/telegramdesktop/tdesktop/workflows/MacOS./badge.svg)](https://github.com/telegramdesktop/tdesktop/actions)
-[![Build Status](https://github.com/telegramdesktop/tdesktop/workflows/Linux./badge.svg)](https://github.com/telegramdesktop/tdesktop/actions)
-[![Built with Depot](https://img.shields.io/badge/Built%20with-Depot.dev-46A75A)](https://depot.dev)
+<br/>
 
-[![Preview of Telegram Desktop][preview_image]][preview_image_url]
+[![CI](https://github.com/haerin-tg/katsuki-desktop/actions/workflows/linux.yml/badge.svg)](https://github.com/haerin-tg/katsuki-desktop/actions/workflows/linux.yml)
+[![License: GPL-3.0](https://img.shields.io/badge/License-GPL%203.0-blue.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey.svg)](#-building)
+[![Status](https://img.shields.io/badge/status-early%20alpha-orange.svg)](#-roadmap)
+[![Based on tdesktop](https://img.shields.io/badge/based%20on-telegramdesktop%2Ftdesktop-26A5E4.svg)](https://github.com/telegramdesktop/tdesktop)
 
-The source code is published under GPLv3 with OpenSSL exception, the license is available [here][license].
+**A Telegram Desktop client where your profile is a listening room.** 💿
 
-## Supported systems
+*勝 — "victory". Flat surfaces, round shapes, one accent color, real Material 3 player.*
 
-The latest version is available for
+</div>
 
-* [Windows 7 and above (64 bit)](https://telegram.org/dl/desktop/win64) ([portable](https://telegram.org/dl/desktop/win64_portable))
-* [Windows 7 and above (32 bit)](https://telegram.org/dl/desktop/win) ([portable](https://telegram.org/dl/desktop/win_portable))
-* [macOS 10.13 and above](https://telegram.org/dl/desktop/mac)
-* [Linux static build for 64 bit](https://telegram.org/dl/desktop/linux)
-* [Snap](https://snapcraft.io/telegram-desktop)
-* [Flatpak](https://flathub.org/apps/details/org.telegram.desktop)
+---
 
-## Old system versions
+<img src="docs/assets/hero.png" alt="Katsuki Desktop mockup — flat profile with song card" width="100%"/>
 
-Version **4.9.9** was the last that supports older systems
+---
 
-* [macOS 10.12](https://updates.tdesktop.com/tmac/tsetup.4.9.9.dmg)
-* [Linux with glibc < 2.28 static build](https://updates.tdesktop.com/tlinux/tsetup.4.9.9.tar.xz)
+## 💢 Why another Telegram client?
 
-Version **2.4.4** was the last that supports older systems
+Every fork reskins the same thing. Katsuki rebuilds the parts that say something about you — around **music** — while keeping the look **flat and Telegram-honest**: solid fills, RabbitGram-style rounding, Geist type. No glassmorphism. Ever.
 
-* [OS X 10.10 and 10.11](https://updates.tdesktop.com/tosx/tsetup-osx.2.4.4.dmg)
-* [Linux static build for 32 bit](https://updates.tdesktop.com/tlinux32/tsetup32.2.4.4.tar.xz)
+### 1 · Profile, honest and new
 
-Version **1.8.15** was the last that supports older systems
+A profile shows a *person*, not a library. Rounded-square avatar, name, handle, a quiet **"listening now"** pill, pill action row, and clean rounded info rows — familiar bones, brand-new composition.
 
-* [Windows XP and Vista](https://updates.tdesktop.com/tsetup/tsetup.1.8.15.exe) ([portable](https://updates.tdesktop.com/tsetup/tportable.1.8.15.zip))
-* [OS X 10.8 and 10.9](https://updates.tdesktop.com/tmac/tsetup.1.8.15.dmg)
-* [OS X 10.6 and 10.7](https://updates.tdesktop.com/tmac32/tsetup32.1.8.15.dmg)
+### 2 · The song card
 
-## Third-party
+No tiny name/artist pill. The profile carries **one designed card**: cover thumbnail + title + artist inside a wide rounded pill with a flat, single-hue background design. Clicking it opens the whole playlist.
 
-* Qt 6 ([LGPL](http://doc.qt.io/qt-6/lgpl.html)) and Qt 5.15 ([LGPL](http://doc.qt.io/qt-5/lgpl.html)) slightly patched
-* OpenSSL 3.2.1 ([Apache License 2.0](https://openssl-library.org/source/license/apache-license-2.0.txt))
-* WebRTC ([New BSD License](https://github.com/desktop-app/tg_owt/blob/master/LICENSE))
-* zlib ([zlib License](http://www.zlib.net/zlib_license.html))
-* LZMA SDK 9.20 ([public domain](http://www.7-zip.org/sdk.html))
-* liblzma ([public domain](http://tukaani.org/xz/))
-* Google Breakpad ([License](https://chromium.googlesource.com/breakpad/breakpad/+/master/LICENSE))
-* Google Crashpad ([Apache License 2.0](https://chromium.googlesource.com/crashpad/crashpad/+/master/LICENSE))
-* GYP ([BSD License](https://github.com/bnoordhuis/gyp/blob/master/LICENSE))
-* Ninja ([Apache License 2.0](https://github.com/ninja-build/ninja/blob/master/COPYING))
-* OpenAL Soft ([LGPL](https://github.com/kcat/openal-soft/blob/master/COPYING))
-* Opus codec ([BSD License](http://www.opus-codec.org/license/))
-* FFmpeg ([LGPL](https://www.ffmpeg.org/legal.html))
-* Guideline Support Library ([MIT License](https://github.com/Microsoft/GSL/blob/master/LICENSE))
-* Range-v3 ([Boost License](https://github.com/ericniebler/range-v3/blob/master/LICENSE.txt))
-* Open Sans font ([Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0.html))
-* Vazirmatn font ([SIL Open Font License 1.1](https://github.com/rastikerdar/vazirmatn/blob/master/OFL.txt))
-* Emoji alpha codes ([MIT License](https://github.com/emojione/emojione/blob/master/extras/alpha-codes/LICENSE.md))
-* xxHash ([BSD License](https://github.com/Cyan4973/xxHash/blob/dev/LICENSE))
-* QR Code generator ([MIT License](https://github.com/nayuki/QR-Code-generator#license))
-* CMake ([New BSD License](https://github.com/Kitware/CMake/blob/master/Copyright.txt))
-* Hunspell ([LGPL](https://github.com/hunspell/hunspell/blob/master/COPYING.LESSER))
-* Ada ([Apache License 2.0](https://github.com/ada-url/ada/blob/main/LICENSE-APACHE))
+### 3 · The playlist sheet
 
-## Build instructions
+Click the song → the playlist reveals: album art, `24 tracks · 1h 32m`, **Play all**, and a numbered track list with the playing row highlighted. Flat sheet, big rounding.
 
-* [Windows (32-bit and 64-bit)][win]
-* [macOS][mac]
-* [GNU/Linux using Docker][linux]
+### 4 · A real Material 3 player
 
-[//]: # (LINKS)
-[telegram]: https://telegram.org
-[telegram_desktop]: https://desktop.telegram.org
-[telegram_api]: https://core.telegram.org
-[telegram_proto]: https://core.telegram.org/mtproto
-[license]: LICENSE
-[win]: docs/building-win.md
-[mac]: docs/building-mac.md
-[linux]: docs/building-linux.md
-[preview_image]: https://github.com/telegramdesktop/tdesktop/blob/dev/docs/assets/preview.png "Preview of Telegram Desktop"
-[preview_image_url]: https://raw.githubusercontent.com/telegramdesktop/tdesktop/dev/docs/assets/preview.png
+Not "round corners = MD3". The player uses the actual MD3 system: type scale (headline-small title), the 4px/20px MD3 slider, segmented repeat modes, assist chip for output device, circular FAB + tonal icon buttons, MD3 list items — plus a mini player bar.
 
-## Thanks to
+---
 
-<a href="https://depot.dev">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://depot.dev/assets/brand/1693758816/depot-logo-horizontal-on-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="https://depot.dev/assets/brand/1693758816/depot-logo-horizontal-on-light.svg">
-    <img alt="Depot" src="https://depot.dev/assets/brand/1693758816/depot-logo-horizontal-on-light.svg" width="150">
-  </picture>
-</a>
+## 🎨 Design system
 
-CI infrastructure sponsored by [Depot](https://depot.dev) — fast GitHub Actions runners.
+**Flat. Round. Honest.** Full spec in [`design.md`](design.md) · engineering notes in [`raw.md`](raw.md) · mockups in [`docs/design-mockups/`](docs/design-mockups).
 
+| Token | Value | Role |
+|---|---|---|
+| Base | `#FFFFFF` / canvas `#E9EBEF` | flat surfaces |
+| Accent | `#3390EC` | the only color |
+| Accent tints | `#E7F1FD` / `#D3E5F9` | card backgrounds, chips |
+| Text | `#111418` / `#656D76` | one dark, one gray |
+| Radius | 14 / 18 / 24 / 28 / pill | everything round |
+| Type | Geist + Geist Mono | Vercel's type system |
+| Player | Material 3 shape + type scale | MD3 done properly |
+
+![bg](https://img.shields.io/badge/-bg%20FFFFFF-FFFFFF)
+![canvas](https://img.shields.io/badge/-canvas%20E9EBEF-E9EBEF)
+![text](https://img.shields.io/badge/-text%20111418-111418)
+![accent](https://img.shields.io/badge/-accent%203390EC-3390EC)
+![tint](https://img.shields.io/badge/-tint%20E7F1FD-E7F1FD)
+
+---
+
+## 🗺️ Roadmap
+
+- [x] Design direction locked — flat / rounded / MD3 / Geist
+- [x] Profile mockups (A centered · B compact), song cards, playlist sheet, MD3 player
+- [x] Phase 0 — repo, CI, provenance
+- [x] Phase 1 — design tokens + waveform scrubber widget (needs v2 token rework)
+- [ ] Theme system in `style/` + `lib_ui` with the v2 tokens
+- [ ] Profile UI in tdesktop (`katsuki/profile`)
+- [ ] Song card + playlist sheet
+- [ ] MD3 player + mini player
+- [ ] Polish: dark theme, hover states, reduced-motion, RTL
+
+---
+
+## 🛠️ Building
+
+Built on the [Telegram Desktop](https://github.com/telegramdesktop/tdesktop) codebase (~10M lines of C++/Qt). CI does the heavy lifting; local builds need the usual tdesktop toolchain (Qt 6, CMake, Ninja, C++20).
+
+```bash
+git clone https://github.com/haerin-tg/katsuki-desktop.git
+cd katsuki-desktop
+# set your API credentials (see below), then the standard tdesktop CMake flow
+```
+
+**API credentials:** Telegram requires every client to have its own `api_id` / `api_hash` — get them free at [my.telegram.org](https://my.telegram.org) (*API development tools*). Development builds use tdesktop's public **test credentials** (`TDESKTOP_API_TEST=ON`); release builds need your real keys as CI secrets.
+
+> ⚠️ **Heads-up:** third-party clients carry account risk. Use a test account while tinkering, and don't do anything against the Telegram ToS.
+
+---
+
+## 🙏 Credits
+
+- **[Telegram Desktop](https://github.com/telegramdesktop/tdesktop)** — the codebase this all stands on. Thank you.
+- **[AyuGram](https://github.com/AyuGram/AyuGramDesktop)** & friends — proof that a fork can have a soul
+- **[RabbitGram](https://github.com/rabbitgramdesktop/rabbitgramdesktop)** — the rounding inspiration
+- **[Geist](https://vercel.com/font)** by Vercel — the type system
+- **[Material Design 3](https://m3.material.io)** — the player's component vocabulary
+
+---
+
+## 📜 License
+
+[GPL-3.0](LICENSE) — same as Telegram Desktop. Keep the license and copyright notices, and you're golden.
+
+*Not affiliated with Telegram Messenger Inc. "Telegram" is a trademark of Telegram Messenger Inc.*

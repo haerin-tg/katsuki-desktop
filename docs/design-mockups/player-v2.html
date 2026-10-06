@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Katsuki · Player v2 — real Material 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ===== MD3 color roles (light scheme, blue primary) ===== */
+  :root{
+    --primary:#2E7CD6; --on-primary:#FFFFFF;
+    --primary-container:#D6E8FB; --on-primary-container:#0B2A47;
+    --secondary-container:#E3E7ED; --on-secondary-container:#1B1F26;
+    --surface:#FCFCFD;
+    --surface-cl:#F7F8FA;  --surface-c:#F1F3F7;
+    --surface-ch:#EAEDF2;  --surface-chh:#E3E7ED;
+    --on-surface:#191C21; --on-surface-var:#565D67;
+    --outline:#BFC5CD; --outline-var:#DEE2E8;
+    --canvas:#E9EBEF;
+    /* MD3 shape */
+    --m3-xs:8px; --m3-s:12px; --m3-m:16px; --m3-l:20px; --m3-xl:28px; --m3-full:999px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Geist',-apple-system,'Segoe UI',sans-serif;color:var(--on-surface);
+    background:radial-gradient(at 12% 12%, #FFC2D8 0%, transparent 55%),radial-gradient(at 88% 6%, #FFE08F 0%, transparent 50%),radial-gradient(at 74% 94%, #AEC8FF 0%, transparent 55%),radial-gradient(at 22% 86%, #C9B4FF 0%, transparent 52%),radial-gradient(at 55% 42%, #A5E1C2 0%, transparent 48%),linear-gradient(135deg,#FBEAF1 0%,#E3EAFC 100%);-webkit-font-smoothing:antialiased;letter-spacing:-0.011em;
+    padding:36px;
+  }
+  .label{
+    font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:#8A919B;margin-bottom:20px;display:flex;gap:14px;align-items:center;
+  }
+  .label b{color:#5B626C;font-weight:500}
+  .label .dot{width:5px;height:5px;border-radius:50%;background:var(--primary)}
+  .tag{font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#8A919B;margin:0 0 10px 4px}
+
+  /* ============ MD3 NOW PLAYING ============ */
+  .player{
+    width:580px;background:var(--surface-ch);border-radius:var(--m3-xl);padding:26px;
+  }
+
+  /* — MD3 headline-small + supporting text — */
+  .np{display:flex;align-items:center;gap:20px}
+  .cover{
+    width:104px;height:104px;border-radius:var(--m3-l);flex:none;position:relative;overflow:hidden;
+    background:radial-gradient(#C3D7EE 1.6px, transparent 1.7px) 0 0/15px 15px, var(--primary-container);
+  }
+  .cover .disc{position:absolute;right:-24px;bottom:-24px;width:96px;height:96px;border-radius:50%;background:#BDD5F0}
+  .cover .disc::after{content:"";position:absolute;inset:36px;border-radius:50%;background:var(--primary-container)}
+  .np .meta{flex:1;min-width:0}
+  .np .t{font-size:24px;font-weight:400;letter-spacing:-0.012em;line-height:1.2}   /* headline-small */
+  .np .a{font-size:14px;color:var(--on-surface-var);margin-top:5px}                  /* body-medium */
+  .np .src{
+    display:inline-flex;align-items:center;gap:7px;margin-top:11px;height:32px;padding:0 13px;
+    border-radius:var(--m3-full);border:1px solid var(--outline);font-size:13px;font-weight:500;
+    color:var(--on-surface);                                                    /* MD3 assist chip */
+  }
+
+  /* — MD3 slider: 4px track / 20px handle — */
+  .slider{margin:28px 4px 0}
+  .track{height:4px;border-radius:var(--m3-full);background:var(--secondary-container);position:relative}
+  .track .fill{position:absolute;left:0;top:0;bottom:0;width:46%;border-radius:var(--m3-full);background:var(--primary)}
+  .track .handle{
+    position:absolute;left:46%;top:50%;transform:translate(-50%,-50%);
+    width:20px;height:20px;border-radius:50%;background:var(--primary);
+  }
+  .times{display:flex;justify-content:space-between;margin-top:9px;font-family:'Geist Mono',monospace;font-size:11px;color:var(--on-surface-var)}
+
+  /* — MD3 transport: standard icon buttons + circular FAB — */
+  .controls{display:flex;align-items:center;justify-content:center;gap:12px;margin:20px 0 8px}
+  .ibtn{
+    width:48px;height:48px;border-radius:var(--m3-full);border:none;background:transparent;
+    display:flex;align-items:center;justify-content:center;color:var(--on-surface);cursor:pointer;
+  }
+  .ibtn.tonal{background:var(--secondary-container);color:var(--on-secondary-container)}
+  .ibtn.tonal.on{background:var(--primary-container);color:var(--on-primary-container)}
+  .fab{
+    width:72px;height:72px;border-radius:50%;background:var(--primary);border:none;   /* circular FAB */
+    display:flex;align-items:center;justify-content:center;cursor:pointer;
+  }
+
+  /* — MD3 segmented button (repeat modes) — */
+  .seg{
+    display:flex;margin:18px auto 2px;width:330px;height:46px;
+    border:1px solid var(--outline);border-radius:var(--m3-full);overflow:hidden;
+  }
+  .seg .s{
+    flex:1;display:flex;align-items:center;justify-content:center;gap:7px;
+    font-size:13px;font-weight:500;color:var(--on-surface);cursor:pointer;
+  }
+  .seg .s + .s{border-left:1px solid var(--outline)}
+  .seg .s.on{background:var(--secondary-container);color:var(--on-secondary-container)}
+
+  /* — MD3 list (up next) — */
+  .upnext{margin-top:22px;background:var(--surface-cl);border-radius:var(--m3-l);padding:8px}
+  .hd{
+    display:flex;justify-content:space-between;align-items:center;padding:10px 12px 8px;
+  }
+  .hd b{font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--on-surface-var);font-weight:500}
+  .hd a{font-size:12.5px;color:var(--primary);text-decoration:none;font-weight:500}
+  .li{display:flex;align-items:center;gap:13px;padding:9px 12px;border-radius:var(--m3-m)}
+  .li:hover{background:var(--surface-c)}
+  .li .th{width:44px;height:44px;border-radius:var(--m3-s);flex:none;background:var(--primary-container)}
+  .li.playing .th{background:var(--primary)}
+  .li .n{font-size:14.5px;font-weight:500}                                        /* title-medium-ish */
+  .li .d{font-size:12.5px;color:var(--on-surface-var);margin-top:2px}
+  .li .dur{margin-left:auto;font-family:'Geist Mono',monospace;font-size:11px;color:var(--on-surface-var)}
+  .li .eq{margin-left:auto;display:flex;align-items:flex-end;gap:3px;height:16px}
+  .li .eq i{width:3.5px;border-radius:2px;background:var(--primary)}
+  .li .eq i:nth-child(1){height:8px}.li .eq i:nth-child(2){height:15px}.li .eq i:nth-child(3){height:5px}
+
+  /* ============ MD3 MINI PLAYER ============ */
+  .mini{
+    width:580px;margin-top:26px;background:var(--surface-c);border-radius:var(--m3-l);
+    padding:10px 14px;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;
+  }
+  .mini .prog{position:absolute;left:0;top:0;height:3px;width:46%;background:var(--primary);border-radius:0 3px 3px 0}
+  .mini .th{width:48px;height:48px;border-radius:var(--m3-s);flex:none;background:var(--primary-container)}
+  .mini .n{font-size:14px;font-weight:500}
+  .mini .d{font-size:12px;color:var(--on-surface-var);margin-top:2px}
+  .mini .sp{flex:1}
+</style>
+</head>
+<body>
+
+<div class="label"><span class="dot"></span><b>Katsuki / Player v2</b> · real MD3: type scale · slider · segmented · assist chip · list</div>
+<div class="tag">a · now playing — surface-container-high · md3 slider · segmented repeat modes</div>
+
+<div class="player">
+  <div class="np">
+    <div class="cover"><div class="disc"></div></div>
+    <div class="meta">
+      <div class="t">Moonlight Drive</div>
+      <div class="a">Nova Lane — Midnight Tales</div>
+      <div class="src">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8"/></svg>
+        This device
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <button class="ibtn tonal">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+    </button>
+  </div>
+
+  <div class="slider">
+    <div class="track">
+      <div class="fill"></div>
+      <div class="handle"></div>
+    </div>
+    <div class="times"><span>1:34</span><span>3:24</span></div>
+  </div>
+
+  <div class="controls">
+    <button class="ibtn">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M4 20L21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
+    </button>
+    <button class="ibtn tonal">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2.5v12H6zM19 6v12l-9.5-6z"/></svg>
+    </button>
+    <button class="fab">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13l11-6.5z"/></svg>
+    </button>
+    <button class="ibtn tonal">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 6h-2.5v12H18zM5 6v12l9.5-6z"/></svg>
+    </button>
+    <button class="ibtn">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+    </button>
+  </div>
+
+  <div class="seg">
+    <div class="s">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+      Off
+    </div>
+    <div class="s on">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      Repeat all
+    </div>
+    <div class="s">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/><text x="12" y="15" font-size="9" fill="currentColor" stroke="none" text-anchor="middle" font-family="Geist">1</text></svg>
+      One
+    </div>
+  </div>
+
+  <div class="upnext">
+    <div class="hd"><b>up next</b><a href="#">Queue · 24</a></div>
+    <div class="li playing">
+      <div class="th"></div>
+      <div><div class="n">Moonlight Drive</div><div class="d">Nova Lane</div></div>
+      <div class="eq"><i></i><i></i><i></i></div>
+    </div>
+    <div class="li">
+      <div class="th"></div>
+      <div><div class="n">Slow Motion</div><div class="d">The Paper Kites</div></div>
+      <div class="dur">4:02</div>
+    </div>
+    <div class="li">
+      <div class="th"></div>
+      <div><div class="n">Afterglow</div><div class="d">Nova Lane</div></div>
+      <div class="dur">2:58</div>
+    </div>
+  </div>
+</div>
+
+<div class="tag" style="margin-top:28px">b · mini player — surface-container · top progress · standard icon buttons</div>
+<div class="mini">
+  <div class="prog"></div>
+  <div class="th"></div>
+  <div>
+    <div class="n">Moonlight Drive</div>
+    <div class="d">Nova Lane · 1:34 / 3:24</div>
+  </div>
+  <div class="sp"></div>
+  <button class="ibtn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2.5v12H6zM19 6v12l-9.5-6z"/></svg></button>
+  <button class="ibtn tonal" style="width:44px;height:44px"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></button>
+  <button class="ibtn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 6h-2.5v12H18zM5 6v12l9.5-6z"/></svg></button>
+</div>
+
+</body>
+</html>

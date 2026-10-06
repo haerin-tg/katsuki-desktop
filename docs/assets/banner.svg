@@ -1,0 +1,65 @@
+<svg width="1200" height="380" viewBox="0 0 1200 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- white base: color lives in the decorations, not in the design background -->
+  <rect width="1200" height="380" rx="24" fill="#FFFFFF"/>
+
+  <!-- pastel decorative shapes -->
+  <circle cx="105" cy="335" r="120" fill="#FFD9E7"/>
+  <circle cx="256" cy="366" r="76" fill="#FFE9B0"/>
+  <rect x="404" y="316" width="150" height="150" rx="48" fill="#C9DDFF"/>
+  <circle cx="640" cy="372" r="90" fill="#E0D4FF"/>
+  <circle cx="1178" cy="26" r="110" fill="#CFEFE2"/>
+  <rect x="612" y="-48" width="130" height="130" rx="42" fill="#FFE9B0"/>
+
+  <!-- micro label -->
+  <text x="86" y="70" font-family="'Geist Mono','SF Mono',Menlo,Consolas,monospace" font-size="14.5" font-weight="500" letter-spacing="7" fill="#8A919B">TELEGRAM DESKTOP CLIENT ✳ EST. 2026</text>
+  <rect x="86" y="88" width="52" height="3" rx="1.5" fill="#3390EC"/>
+
+  <!-- wordmark: one solid word, decorated with a second typeface + marks -->
+  <text x="82" y="192" font-family="Geist, Inter, 'SF Pro Display', 'Segoe UI', Helvetica, Arial, sans-serif" font-size="96" font-weight="800" letter-spacing="7" fill="#111418">KATSUKI</text>
+  <text x="600" y="128" font-family="Georgia, 'Times New Roman', serif" font-size="56" font-style="italic" fill="#3390EC">*</text>
+
+  <!-- second line: serif italic + mono -->
+  <text x="86" y="252" font-family="Georgia, 'Times New Roman', serif" font-size="52" font-style="italic" fill="#3D434C">desktop</text>
+  <text x="312" y="248" font-family="'Geist Mono','SF Mono',Menlo,Consolas,monospace" font-size="18" font-weight="500" letter-spacing="5" fill="#8A919B">/ KATSUKI UI</text>
+
+  <!-- caption row -->
+  <rect x="88" y="284" width="10" height="10" rx="3" fill="#3390EC"/>
+  <text x="112" y="294" font-family="'Geist Mono','SF Mono',Menlo,Consolas,monospace" font-size="14.5" font-weight="400" letter-spacing="4" fill="#656D76">FLAT · ROUNDED · MATERIAL</text>
+
+  <!-- ===== flat UI composition on its own white panel ===== -->
+  <rect x="700" y="66" width="420" height="248" rx="28" fill="#F3F4F6"/>
+
+  <!-- mini song card -->
+  <rect x="726" y="96" width="368" height="76" rx="21" fill="#E7F1FD"/>
+  <rect x="1022" y="112" width="8" height="18" rx="4" fill="#D3E5F9"/>
+  <rect x="1036" y="106" width="8" height="30" rx="4" fill="#D3E5F9"/>
+  <rect x="1050" y="116" width="8" height="14" rx="4" fill="#D3E5F9"/>
+  <rect x="742" y="107" width="54" height="54" rx="14" fill="#C9DFF7"/>
+  <circle cx="769" cy="134" r="15" fill="#8FB9E8"/>
+  <circle cx="769" cy="134" r="5.5" fill="#C9DFF7"/>
+  <rect x="810" y="116" width="120" height="11" rx="5.5" fill="#0E1420"/>
+  <rect x="810" y="136" width="80" height="8" rx="4" fill="#8FB2D8"/>
+  <circle cx="1074" cy="134" r="18" fill="#3390EC"/>
+  <path d="M1070 127 L1080 134 L1070 141 Z" fill="#FFFFFF"/>
+
+  <!-- mini channel card -->
+  <rect x="726" y="186" width="368" height="58" rx="18" fill="#FFFFFF"/>
+  <rect x="1022" y="198" width="7" height="14" rx="3.5" fill="#E2E5EA"/>
+  <rect x="1035" y="193" width="7" height="24" rx="3.5" fill="#E2E5EA"/>
+  <rect x="1048" y="200" width="7" height="10" rx="3.5" fill="#E2E5EA"/>
+  <circle cx="762" cy="215" r="20" fill="#DCE0E6"/>
+  <rect x="752" y="209" width="20" height="5" rx="2.5" fill="#5A636E"/>
+  <rect x="752" y="218" width="14" height="5" rx="2.5" fill="#5A636E"/>
+  <rect x="794" y="201" width="100" height="9" rx="4.5" fill="#111418"/>
+  <rect x="794" y="218" width="176" height="7" rx="3.5" fill="#AAB2BC"/>
+
+  <!-- mini transport -->
+  <rect x="822" y="268" width="34" height="34" rx="17" fill="#FFFFFF"/>
+  <path d="M836 278 L836 292 L828 285 Z" fill="#111418"/>
+  <rect x="852" y="278" width="3.4" height="14" rx="1.7" fill="#111418"/>
+  <circle cx="906" cy="285" r="22" fill="#3390EC"/>
+  <path d="M900 276 L915 285 L900 294 Z" fill="#FFFFFF"/>
+  <rect x="950" y="268" width="34" height="34" rx="17" fill="#FFFFFF"/>
+  <path d="M958 278 L958 292 L966 285 Z" fill="#111418"/>
+  <rect x="965" y="278" width="3.4" height="14" rx="1.7" fill="#111418"/>
+</svg>

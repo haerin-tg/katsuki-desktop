@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Katsuki · Song cards II + playlist sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF;--canvas:#E9EBEF;--subtle:#F3F4F6;--border:#E6E8EB;
+    --text:#111418;--text-2:#656D76;
+    --accent:#3390EC;--accent-soft:#E7F1FD;--accent-tint:#D3E5F9;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Geist',-apple-system,'Segoe UI',sans-serif;color:var(--text);
+    background:radial-gradient(at 12% 12%, #FFC2D8 0%, transparent 55%),radial-gradient(at 88% 6%, #FFE08F 0%, transparent 50%),radial-gradient(at 74% 94%, #AEC8FF 0%, transparent 55%),radial-gradient(at 22% 86%, #C9B4FF 0%, transparent 52%),radial-gradient(at 55% 42%, #A5E1C2 0%, transparent 48%),linear-gradient(135deg,#FBEAF1 0%,#E3EAFC 100%);-webkit-font-smoothing:antialiased;letter-spacing:-0.011em;
+    padding:36px;
+  }
+  .label{
+    font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:#8A919B;margin-bottom:20px;display:flex;gap:14px;align-items:center;
+  }
+  .label b{color:#5B626C;font-weight:500}
+  .label .dot{width:5px;height:5px;border-radius:50%;background:var(--accent)}
+  .tag{font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#8A919B;margin:22px 0 10px 4px}
+  .tag:first-of-type{margin-top:0}
+  .sub{font-size:13px;color:var(--text-2);margin:-12px 0 18px}
+
+  .row3{display:flex;gap:16px}
+  .stack{display:flex;flex-direction:column;gap:14px;width:500px}
+
+  .song-card{position:relative;height:88px;border-radius:24px;overflow:hidden;display:flex;align-items:center;gap:14px;padding:0 16px}
+  .disc{width:58px;height:58px;border-radius:15px;flex:none;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .disc .vinyl{width:32px;height:32px;border-radius:50%;position:relative}
+  .disc .vinyl::after{content:"";position:absolute;inset:11px;border-radius:50%}
+  .meta{flex:1;min-width:0;position:relative;z-index:1}
+  .meta .t{font-size:15.5px;font-weight:600;letter-spacing:-0.017em;white-space:nowrap}
+  .meta .a{font-size:12.5px;margin-top:3px;display:flex;align-items:center;gap:8px}
+  .play{width:44px;height:44px;border-radius:50%;flex:none;z-index:1;display:flex;align-items:center;justify-content:center}
+
+  /* ===== D · quarter arcs ===== */
+  .v-d{background:var(--accent-soft)}
+  .v-d .arcs{position:absolute;right:-46px;top:50%;transform:translateY(-50%)}
+  .v-d .arcs i{position:absolute;border-radius:50%;border:10px solid var(--accent-tint);right:0;top:50%;transform:translate(50%,-50%)}
+  .v-d .arcs i:nth-child(1){width:86px;height:86px}
+  .v-d .arcs i:nth-child(2){width:126px;height:126px}
+  .v-d .arcs i:nth-child(3){width:166px;height:166px}
+  .v-d .disc{background:#C9DFF7}.v-d .disc .vinyl{background:#8FB9E8}.v-d .disc .vinyl::after{background:#C9DFF7}
+  .v-d .t{color:#0E1420}.v-d .a{color:#4A6B92}.v-d .play{background:var(--accent)}
+  .v-d .a .time{font-family:'Geist Mono',monospace;font-size:11px;color:#6E8DB2}
+  .v-d .a .time::before{content:"";display:inline-block;width:3px;height:3px;border-radius:50%;background:#9DB9D8;margin:0 7px 2px 0}
+
+  /* ===== E · step blocks ===== */
+  .v-e{background:#F2F4F7}
+  .v-e .steps{position:absolute;right:78px;top:0;bottom:0;display:flex;align-items:center;gap:6px}
+  .v-e .steps i{width:12px;border-radius:6px;background:#DCE1E8}
+  .v-e .steps i:nth-child(1){height:18px}.v-e .steps i:nth-child(2){height:34px}
+  .v-e .steps i:nth-child(3){height:24px}.v-e .steps i:nth-child(4){height:48px}
+  .v-e .steps i:nth-child(5){height:30px}.v-e .steps i:nth-child(6){height:40px}
+  .v-e .disc{background:#DDE3EA}.v-e .disc .vinyl{background:#AAB6C4}.v-e .disc .vinyl::after{background:#DDE3EA}
+  .v-e .t{color:#0E1420}.v-e .a{color:#5A636E}.v-e .play{background:var(--text)}
+  .v-e .a .time{font-family:'Geist Mono',monospace;font-size:11px;color:#828B96}
+  .v-e .a .time::before{content:"";display:inline-block;width:3px;height:3px;border-radius:50%;background:#B4BAC3;margin:0 7px 2px 0}
+
+  /* ===== F · two-tone split + big vinyl ===== */
+  .v-f{background:linear-gradient(90deg,var(--accent-soft) 0 62%, var(--accent-tint) 62% 100%)}
+  .v-f .big{position:absolute;right:-30px;top:50%;transform:translateY(-50%);width:130px;height:130px;border-radius:50%;background:#C3DBF5}
+  .v-f .big::after{content:"";position:absolute;inset:48px;border-radius:50%;background:var(--accent-tint)}
+  .v-f .disc{background:#C9DFF7}.v-f .disc .vinyl{background:#8FB9E8}.v-f .disc .vinyl::after{background:#C9DFF7}
+  .v-f .t{color:#0E1420}.v-f .a{color:#4A6B92}.v-f .play{background:var(--accent)}
+  .v-f .a .time{font-family:'Geist Mono',monospace;font-size:11px;color:#6E8DB2}
+  .v-f .a .time::before{content:"";display:inline-block;width:3px;height:3px;border-radius:50%;background:#9DB9D8;margin:0 7px 2px 0}
+
+  .tag2{position:absolute;top:10px;left:14px;z-index:2;font-family:'Geist Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;background:rgba(255,255,255,.85);color:#54606F;padding:3px 8px;border-radius:999px;font-weight:500}
+
+  /* ===== compact playing row (inside playlist) ===== */
+  .compact{
+    display:flex;align-items:center;gap:12px;height:62px;border-radius:18px;background:var(--accent-soft);
+    padding:0 14px;
+  }
+  .compact .th{width:42px;height:42px;border-radius:11px;background:#C9DFF7;flex:none;display:flex;align-items:center;justify-content:center}
+  .compact .th .vinyl{width:23px;height:23px;border-radius:50%;background:#8FB9E8;position:relative}
+  .compact .th .vinyl::after{content:"";position:absolute;inset:8px;border-radius:50%;background:#C9DFF7}
+  .compact .t{font-size:14px;font-weight:600}
+  .compact .a{font-size:12px;color:#4A6B92;margin-top:1px}
+  .compact .eq{margin-left:auto;display:flex;align-items:flex-end;gap:3px;height:15px}
+  .compact .eq i{width:3.5px;border-radius:2px;background:var(--accent)}
+  .compact .eq i:nth-child(1){height:7px}.compact .eq i:nth-child(2){height:14px}.compact .eq i:nth-child(3){height:5px}
+
+  /* ===== playlist sheet (click → reveal) ===== */
+  .sheet{width:500px;background:var(--bg);border:1px solid var(--border);border-radius:28px;overflow:hidden}
+  .sheet .grab{width:38px;height:4px;border-radius:2px;background:#D8DCE2;margin:10px auto 2px}
+  .sheet .sh{display:flex;align-items:center;gap:15px;padding:14px 20px 12px}
+  .sheet .sh .art{
+    width:64px;height:64px;border-radius:18px;flex:none;position:relative;overflow:hidden;
+    background:radial-gradient(#C3D7EE 1.6px, transparent 1.7px) 0 0/14px 14px, var(--accent-soft);
+  }
+  .sheet .sh .art .d{position:absolute;right:-16px;bottom:-16px;width:58px;height:58px;border-radius:50%;background:#BDD5F0}
+  .sheet .sh .art .d::after{content:"";position:absolute;inset:21px;border-radius:50%;background:var(--accent-soft)}
+  .sheet .sh .ttl{font-size:18px;font-weight:600;letter-spacing:-0.02em}
+  .sheet .sh .st{font-size:12.5px;color:var(--text-2);margin-top:3px;font-family:'Geist Mono',monospace}
+  .sheet .sh .pa{
+    margin-left:auto;height:42px;padding:0 18px;border-radius:999px;background:var(--accent);color:#fff;
+    display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;
+  }
+  .sheet .list{padding:4px 10px 12px}
+  .tr{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:14px}
+  .tr:hover{background:var(--subtle)}
+  .tr .idx{width:22px;font-family:'Geist Mono',monospace;font-size:11px;color:#A2A9B3;text-align:center}
+  .tr.on{background:var(--accent-soft)}
+  .tr.on .idx{color:var(--accent)}
+  .tr .n{font-size:14px;font-weight:500}
+  .tr .d{font-size:12px;color:var(--text-2);margin-top:1px}
+  .tr .dur{margin-left:auto;font-family:'Geist Mono',monospace;font-size:11px;color:var(--text-2)}
+  .tr .eq{margin-left:auto;display:flex;align-items:flex-end;gap:3px;height:14px}
+  .tr .eq i{width:3.5px;border-radius:2px;background:var(--accent)}
+  .tr .eq i:nth-child(1){height:6px}.tr .eq i:nth-child(2){height:13px}.tr .eq i:nth-child(3){height:5px}
+</style>
+</head>
+<body>
+
+<div class="label"><span class="dot"></span><b>Katsuki / Song cards II + playlist sheet</b> · 3 more backgrounds · compact row · click-to-reveal</div>
+
+<div class="tag">new background designs — all flat, single hue</div>
+<div class="stack">
+
+  <div class="song-card v-d">
+    <div class="tag2">D · quarter arcs</div>
+    <div class="arcs"><i></i><i></i><i></i></div>
+    <div class="disc"><div class="vinyl"></div></div>
+    <div class="meta">
+      <div class="t">Moonlight Drive</div>
+      <div class="a">Nova Lane<span class="time">3:24</span></div>
+    </div>
+    <div class="play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13l11-6.5z"/></svg></div>
+  </div>
+
+  <div class="song-card v-e">
+    <div class="tag2">E · step blocks</div>
+    <div class="steps"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="disc"><div class="vinyl"></div></div>
+    <div class="meta">
+      <div class="t">Slow Motion</div>
+      <div class="a">The Paper Kites<span class="time">4:02</span></div>
+    </div>
+    <div class="play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13l11-6.5z"/></svg></div>
+  </div>
+
+  <div class="song-card v-f">
+    <div class="tag2">F · two-tone split</div>
+    <div class="big"></div>
+    <div class="disc"><div class="vinyl"></div></div>
+    <div class="meta">
+      <div class="t">Afterglow</div>
+      <div class="a">Nova Lane<span class="time">2:58</span></div>
+    </div>
+    <div class="play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13l11-6.5z"/></svg></div>
+  </div>
+
+  <div class="compact">
+    <div class="th"><div class="vinyl"></div></div>
+    <div>
+      <div class="t">Moonlight Drive</div>
+      <div class="a">Nova Lane · 3:24</div>
+    </div>
+    <div class="eq"><i></i><i></i><i></i></div>
+  </div>
+
+</div>
+
+<div class="tag">click the song → playlist sheet (flat, rounded 28)</div>
+
+<div class="sheet">
+  <div class="grab"></div>
+  <div class="sh">
+    <div class="art"><div class="d"></div></div>
+    <div>
+      <div class="ttl">Late Nights</div>
+      <div class="st">24 tracks · 1h 32m</div>
+    </div>
+    <div class="pa">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13l11-6.5z"/></svg>
+      Play all
+    </div>
+  </div>
+  <div class="list">
+    <div class="tr on">
+      <div class="idx">1</div>
+      <div><div class="n">Moonlight Drive</div><div class="d">Nova Lane</div></div>
+      <div class="eq"><i></i><i></i><i></i></div>
+    </div>
+    <div class="tr">
+      <div class="idx">2</div>
+      <div><div class="n">Slow Motion</div><div class="d">The Paper Kites</div></div>
+      <div class="dur">4:02</div>
+    </div>
+    <div class="tr">
+      <div class="idx">3</div>
+      <div><div class="n">Afterglow</div><div class="d">Nova Lane</div></div>
+      <div class="dur">2:58</div>
+    </div>
+    <div class="tr">
+      <div class="idx">4</div>
+      <div><div class="n">Paper Planes</div><div class="d">Rivers &amp; Roads</div></div>
+      <div class="dur">3:41</div>
+    </div>
+    <div class="tr">
+      <div class="idx">5</div>
+      <div><div class="n">Midnight Tales</div><div class="d">Nova Lane</div></div>
+      <div class="dur">3:12</div>
+    </div>
+    <div class="tr">
+      <div class="idx">6</div>
+      <div><div class="n">Static Bloom</div><div class="d">Harbor Lights</div></div>
+      <div class="dur">4:27</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

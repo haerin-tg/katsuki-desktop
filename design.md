@@ -73,7 +73,7 @@ MD3 player role mapping: `primary #2E7CD6`, `primary-container #D6E8FB`, `second
 
 Telegram bones, new composition. **No playlist tiles, no "Music" section header** — a profile shows a person, not a library.
 
-- **Variant A — centered hero:** rounded-square avatar (124², r36) → name (22/600) → `@handle` → "listening now" pill (accent-soft, live dot) → action pill row → **single song card** → info container (phone / username / bio rows).
+- **Variant A — centered hero:** rounded-square avatar (124², r36) → name (22/600) → `@handle` → "listening now" pill (accent-soft, live dot) → action pill row → **single song card** → **channel card** → info container (phone / username / bio rows).
 - **Variant B — compact desktop panel:** avatar (82², r26) + name/handle/status on one row, action pills, song card, bio tile (subtle, r14), info rows. Denser, tdesktop-panel feel.
 
 Action row: `Message` (accent, flex 2.2) · `Call` (tonal) · `···` (tonal square-pill).
@@ -95,11 +95,20 @@ Background designs (flat, single-hue):
 
 **Compact row** (inside playlists): h62, r18, cover 42², playing indicator = eq bars instead of duration.
 
-### 3 · Playlist sheet (`music-sheet.html`)
+### 3 · Channel card (attached channel)
+
+A profile can **attach one channel**. Same card family as the song card, but **tinier and quieter** (neutral surface, so music stays the star). Sits **directly below the music card**.
+
+- Container h≈62, r18, `--subtle` background with a faint slice motif (same motif language as the song card, gray)
+- **PFP** 40² r11 (flat avatar/initials) · **channel name** 13.5/600 · **last message** 12 secondary — single line, **truncated with `…` when too long**
+- Trailing `›` chevron → opens the channel
+- Anatomy mirrors the song card (thumb + meta + affordance) at ≈0.75 scale
+
+### 4 · Playlist sheet (`music-sheet.html`)
 
 Click song → reveal. Flat sheet, r28, grabber bar, header (album art 64² r18 + title + `24 tracks · 1h 32m` mono + `Play all` pill), numbered track list (r14 rows), playing row = accent-soft background + eq bars.
 
-### 4 · Player — Material 3 (`player-v2.html`)
+### 5 · Player — Material 3 (`player-v2.html`)
 
 Genuine MD3 composition, not just round corners:
 
@@ -112,7 +121,7 @@ Genuine MD3 composition, not just round corners:
 - **Up next:** MD3 list in `surface-container-low`, r20 container; items = 44² thumb r12 + title/body + mono duration; playing item gets eq bars
 - **Mini player:** `surface-container` bar r20 — 3px top progress line, 48² thumb, standard icon buttons, tonal play
 
-### 5 · Shape sheet (`shapes.html`)
+### 6 · Shape sheet (`shapes.html`)
 
 System reference: buttons (primary/tonal/neutral/outline + small), chips (selected/outline), super-round chat bubbles, list rows, inputs (default/focused), dialog. Approved as-is.
 
@@ -132,7 +141,7 @@ System reference: buttons (primary/tonal/neutral/outline + small), chips (select
 | File | What |
 |---|---|
 | `docs/design-mockups/profile.html` / `.png` | profile v1 (superseded, kept for history) |
-| `docs/design-mockups/profile-v2.html` / `.png` | **profile — current (A/B)** |
+| `docs/design-mockups/profile-v2.html` / `.png` | **profile — current (A/B, music card + channel card)** |
 | `docs/design-mockups/song-card.html` / `.png` | card backgrounds A/B/C |
 | `docs/design-mockups/music-sheet.html` / `.png` | cards D/E/F + compact row + playlist sheet |
 | `docs/design-mockups/player.html` / `.png` | player v1 (superseded) |

@@ -1,77 +1,56 @@
 <svg width="1200" height="380" viewBox="0 0 1200 380" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <radialGradient id="glowA" cx="0.18" cy="0.12" r="0.85">
-      <stop offset="0%" stop-color="#7C5CFF" stop-opacity="0.42"/>
-      <stop offset="55%" stop-color="#7C5CFF" stop-opacity="0.07"/>
-      <stop offset="100%" stop-color="#7C5CFF" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="glowB" cx="0.88" cy="0.92" r="0.9">
-      <stop offset="0%" stop-color="#4EA8FF" stop-opacity="0.36"/>
-      <stop offset="55%" stop-color="#4EA8FF" stop-opacity="0.06"/>
-      <stop offset="100%" stop-color="#4EA8FF" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="glowC" cx="0.72" cy="0.1" r="0.5">
-      <stop offset="0%" stop-color="#3ED598" stop-opacity="0.14"/>
-      <stop offset="100%" stop-color="#3ED598" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#7C5CFF"/>
-      <stop offset="100%" stop-color="#4EA8FF"/>
-    </linearGradient>
-    <linearGradient id="accentSoft" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#7C5CFF" stop-opacity="0.9"/>
-      <stop offset="100%" stop-color="#4EA8FF" stop-opacity="0.9"/>
-    </linearGradient>
-    <linearGradient id="glassStroke" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.16"/>
-      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.03"/>
-    </linearGradient>
-  </defs>
+  <!-- flat canvas -->
+  <rect width="1200" height="380" rx="24" fill="#F2F4F7"/>
 
-  <!-- base -->
-  <rect width="1200" height="380" rx="24" fill="#0A0B0F"/>
-  <rect width="1200" height="380" rx="24" fill="url(#glowA)"/>
-  <rect width="1200" height="380" rx="24" fill="url(#glowB)"/>
-  <rect width="1200" height="380" rx="24" fill="url(#glowC)"/>
-
-  <!-- vinyl, right -->
-  <g transform="translate(1015 190)">
-    <circle r="128" fill="#101219" stroke="url(#glassStroke)" stroke-width="1.5"/>
-    <circle r="112" fill="none" stroke="#FFFFFF" stroke-opacity="0.05" stroke-width="1"/>
-    <circle r="97" fill="none" stroke="#FFFFFF" stroke-opacity="0.05" stroke-width="1"/>
-    <circle r="82" fill="none" stroke="#FFFFFF" stroke-opacity="0.06" stroke-width="1"/>
-    <circle r="67" fill="none" stroke="#FFFFFF" stroke-opacity="0.05" stroke-width="1"/>
-    <circle r="52" fill="none" stroke="#FFFFFF" stroke-opacity="0.06" stroke-width="1"/>
-    <circle r="42" fill="url(#accent)"/>
-    <circle r="42" fill="#0A0B0F" fill-opacity="0.25"/>
-    <circle r="7" fill="#0A0B0F"/>
-    <circle r="7" fill="none" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
-  </g>
-
-  <!-- equalizer, bottom -->
-  <g transform="translate(90 286)" fill="url(#accentSoft)">
-    <rect x="0"   y="-18" width="9" height="18" rx="4.5" opacity="0.95"/>
-    <rect x="22"  y="-34" width="9" height="34" rx="4.5" opacity="0.9"/>
-    <rect x="44"  y="-12" width="9" height="12" rx="4.5" opacity="0.85"/>
-    <rect x="66"  y="-44" width="9" height="44" rx="4.5" opacity="0.95"/>
-    <rect x="88"  y="-24" width="9" height="24" rx="4.5" opacity="0.8"/>
-    <rect x="110" y="-52" width="9" height="52" rx="4.5" opacity="0.9"/>
-    <rect x="132" y="-16" width="9" height="16" rx="4.5" opacity="0.8"/>
-    <rect x="154" y="-38" width="9" height="38" rx="4.5" opacity="0.95"/>
-    <rect x="176" y="-26" width="9" height="26" rx="4.5" opacity="0.85"/>
-    <rect x="198" y="-48" width="9" height="48" rx="4.5" opacity="0.9"/>
-    <rect x="220" y="-14" width="9" height="14" rx="4.5" opacity="0.8"/>
-    <rect x="242" y="-30" width="9" height="30" rx="4.5" opacity="0.9"/>
-    <rect x="264" y="-46" width="9" height="46" rx="4.5" opacity="0.95"/>
-    <rect x="286" y="-20" width="9" height="20" rx="4.5" opacity="0.8"/>
-    <rect x="308" y="-36" width="9" height="36" rx="4.5" opacity="0.9"/>
-  </g>
+  <!-- cropped flat accent shapes -->
+  <circle cx="1130" cy="40" r="150" fill="#E7F1FD"/>
+  <rect x="-60" y="250" width="220" height="220" rx="60" fill="#E7F1FD"/>
 
   <!-- wordmark -->
-  <text x="90" y="128" font-family="Inter, 'SF Pro Display', 'Segoe UI', Helvetica, Arial, sans-serif" font-size="82" font-weight="800" letter-spacing="14" fill="#F2F3F7">KATSUKI</text>
-  <text x="92" y="192" font-family="Inter, 'SF Pro Display', 'Segoe UI', Helvetica, Arial, sans-serif" font-size="30" font-weight="300" letter-spacing="18" fill="#AEB3C2">DESKTOP</text>
-  <rect x="92" y="216" width="330" height="2" rx="1" fill="url(#accentSoft)" opacity="0.85"/>
+  <rect x="86" y="118" width="10" height="10" rx="3" fill="#3390EC"/>
+  <text x="86" y="196" font-family="Geist, Inter, 'SF Pro Display', 'Segoe UI', Helvetica, Arial, sans-serif" font-size="84" font-weight="800" letter-spacing="6" fill="#111418">KATSUKI</text>
+  <text x="90" y="240" font-family="'Geist Mono', 'SF Mono', Menlo, Consolas, monospace" font-size="21" font-weight="500" letter-spacing="12" fill="#656D76">DESKTOP</text>
+  <rect x="88" y="262" width="330" height="3" rx="1.5" fill="#3390EC"/>
+  <text x="90" y="296" font-family="Geist, Inter, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="500" fill="#8A919B">flat · rounded · material — a music-first Telegram client</text>
 
-  <!-- tagline -->
-  <text x="92" y="252" font-family="Inter, 'SF Pro Display', 'Segoe UI', Helvetica, Arial, sans-serif" font-size="19" font-weight="500" fill="#8B91A5">a music-first Telegram client · flat · rounded · material</text>
+  <!-- ===== flat UI composition, right ===== -->
+
+  <!-- backdrop panel -->
+  <rect x="700" y="66" width="420" height="248" rx="28" fill="#FFFFFF"/>
+
+  <!-- mini song card -->
+  <rect x="726" y="96" width="368" height="76" rx="21" fill="#E7F1FD"/>
+  <rect x="1022" y="112" width="8" height="18" rx="4" fill="#D3E5F9"/>
+  <rect x="1036" y="106" width="8" height="30" rx="4" fill="#D3E5F9"/>
+  <rect x="1050" y="116" width="8" height="14" rx="4" fill="#D3E5F9"/>
+  <rect x="742" y="107" width="54" height="54" rx="14" fill="#C9DFF7"/>
+  <circle cx="769" cy="134" r="15" fill="#8FB9E8"/>
+  <circle cx="769" cy="134" r="5.5" fill="#C9DFF7"/>
+  <rect x="810" y="116" width="120" height="11" rx="5.5" fill="#0E1420"/>
+  <rect x="810" y="136" width="80" height="8" rx="4" fill="#8FB2D8"/>
+  <circle cx="1074" cy="134" r="18" fill="#3390EC"/>
+  <path d="M1070 127 L1080 134 L1070 141 Z" fill="#FFFFFF"/>
+
+  <!-- mini channel card -->
+  <rect x="726" y="186" width="368" height="58" rx="18" fill="#F3F4F6"/>
+  <rect x="1022" y="198" width="7" height="14" rx="3.5" fill="#E2E5EA"/>
+  <rect x="1035" y="193" width="7" height="24" rx="3.5" fill="#E2E5EA"/>
+  <rect x="1048" y="200" width="7" height="10" rx="3.5" fill="#E2E5EA"/>
+  <rect x="742" y="195" width="40" height="40" rx="11" fill="#DCE0E6"/>
+  <rect x="754" y="208" width="16" height="5" rx="2.5" fill="#5A636E"/>
+  <rect x="752" y="216" width="20" height="5" rx="2.5" fill="#5A636E"/>
+  <rect x="794" y="201" width="100" height="9" rx="4.5" fill="#111418"/>
+  <rect x="794" y="218" width="176" height="7" rx="3.5" fill="#AAB2BC"/>
+  <path d="M1066 208 L1073 215 L1066 222" stroke="#A2A9B3" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- mini transport -->
+  <circle cx="878" cy="284" r="0" fill="none"/>
+  <rect x="822" y="268" width="34" height="34" rx="17" fill="#F3F4F6"/>
+  <path d="M836 278 L836 292 L828 285 Z" fill="#111418"/>
+  <rect x="852" y="278" width="3.4" height="14" rx="1.7" fill="#111418"/>
+  <circle cx="906" cy="285" r="22" fill="#3390EC"/>
+  <path d="M900 276 L915 285 L900 294 Z" fill="#FFFFFF"/>
+  <rect x="950" y="268" width="34" height="34" rx="17" fill="#F3F4F6"/>
+  <path d="M958 278 L958 292 L966 285 Z" fill="#111418"/>
+  <rect x="965" y="278" width="3.4" height="14" rx="1.7" fill="#111418"/>
 </svg>

@@ -73,7 +73,7 @@ Not "round corners = MD3". The player uses the actual MD3 system: type scale (he
 - [x] Phase 0 — repo, CI, provenance
 - [x] Phase 1 — design tokens + waveform scrubber widget (needs v2 token rework)
 - [ ] Theme system in `style/` + `lib_ui` with the v2 tokens
-- [ ] Profile UI in tdesktop (`astra/profile`)
+- [ ] Profile UI in tdesktop (`katsuki/profile`)
 - [ ] Song card + playlist sheet
 - [ ] MD3 player + mini player
 - [ ] Polish: dark theme, hover states, reduced-motion, RTL

@@ -40,6 +40,8 @@ Fonts: `Geist` 400/500/600/700 + `Geist Mono` 400/500 via Google Fonts. Base let
 - patterns: slices = 5–6 bars w9–10 r999 `--accent-tint` at right:100px; arcs = 3 circles border 10px; dots = `radial-gradient` 1.6px/14px; steps = 12px bars r6 gray; split = `linear-gradient(90deg, soft 0 62%, tint 62%)`.
 - compact row: h62 r18, thumb 42² r11, eq bars 3.5px w.
 
+**Channel card:** h62, r18, bg `--subtle`, padding 0 13, gap 11, margin-top 9 (below song card). PFP 40² r11 (initials 13.5/600 `#5A636E` on `#DCE0E6`). Name 13.5/600. Last message 12 `--text-2`, `white-space:nowrap; overflow:hidden; text-overflow:ellipsis`. Chevron 16px `#A2A9B3`. Faint slice motif (3 bars w7, `#E2E5EA`, right:44px).
+
 **Playlist sheet:** r28, grabber 38×4 `#D8DCE2`; header art 64² r18; Play all h42 pill; rows r14 padding 10×12, idx column 22px mono 11; playing row bg `--accent-soft`.
 
 **Player (MD3):** card 580px, r28, padding 26, bg `--surface-ch`.
@@ -58,25 +60,26 @@ Fonts: `Geist` 400/500/600/700 + `Geist Mono` 400/500 via Google Fonts. Base let
 - Play button → starts track, row gets eq-bars indicator, mini player appears.
 - "listening now" pill: shown when playback active — accent-soft pill + animated eq dot.
 - Item hover states: rows → `--subtle`; list items → `--surface-c` (MD3 state layer ≈8%).
+- Channel card click (or `›`) → opens the attached channel.
 
 ## 4 · Map to tdesktop source (implementation)
 
 | Feature | Where |
 |---|---|
-| Design tokens | `Telegram/SourceFiles/astra/astra_design.h` (exists — **needs rework to v2 tokens**, drop glass values) |
-| Waveform widget | `astra_waveform.{h,cpp}` (exists — keep for player scrubber later; MD3 slider is the primary control) |
-| Profile UI | `Telegram/SourceFiles/boxes/profile/` → new `astra/profile/` module (AstraProfileBox) |
-| Song card / playlist sheet | new `astra/music/` widgets (custom `RpWidget` painters) |
-| Player UI | `Telegram/SourceFiles/media/` → `AstraPlayerBar` (MD3). Playback core `Media::Player::Instance` unchanged |
+| Design tokens | `Telegram/SourceFiles/katsuki/katsuki_design.h` (exists — **needs rework to v2 tokens**, drop glass values) |
+| Waveform widget | `katsuki_waveform.{h,cpp}` (exists — keep for player scrubber later; MD3 slider is the primary control) |
+| Profile UI | `Telegram/SourceFiles/boxes/profile/` → new `katsuki/profile/` module (KatsukiProfileBox) |
+| Song card / playlist sheet / channel card | new `katsuki/music/` widgets (custom `RpWidget` painters) |
+| Player UI | `Telegram/SourceFiles/media/` → `KatsukiPlayerBar` (MD3). Playback core `Media::Player::Instance` unchanged |
 | Theme/style | `style/` + `lib_ui` — map tokens to `.style` variables; light theme first |
 | Icons | stroke icons 2px (mockups use hand-drawn SVGs). Solaricons (480.design) if license clears for GPL redistribution; else Phosphor/Lucide (MIT) |
 
-Build registration: every new `.cpp` must be added to `Telegram/CMakeLists.txt` (alphabetical, `astra/` entries exist).
+Build registration: every new `.cpp` must be added to `Telegram/CMakeLists.txt` (alphabetical, `katsuki/` entries exist).
 
 ## 5 · Repo / CI state
 
 - Repo: `haerin-tg/katsuki-desktop` — **standalone** (NOT a fork), full history (26,611 commits), default branch `dev`.
-- Branches: `dev`, `astra-ui` (old probe commits: `4bfa6d8` tokens+waveform, noise commits `ca51afe/90be22a/a3ca3b9/8a86d49` — squash later).
+- Branches: `dev`, `katsuki-ui` (old probe commits: `4bfa6d8` tokens+waveform, noise commits `ca51afe/90be22a/a3ca3b9/8a86d49` — squash later).
 - CI: 20 upstream workflows; push to `dev` triggers Linux/Windows/MacOS/MacOS-Packaged/Snap. Dev builds use `TDESKTOP_API_TEST=ON` (no secrets). Release builds later: secrets `TDESKTOP_API_ID` / `TDESKTOP_API_HASH` from my.telegram.org.
 - `paths-ignore` in workflows: `docs/**`, `**.md` don't trigger builds → put design assets under `docs/` to keep CI quiet.
 - Old fork `haerin-tg/tdesktopmac` — archived; user wants deletion eventually.

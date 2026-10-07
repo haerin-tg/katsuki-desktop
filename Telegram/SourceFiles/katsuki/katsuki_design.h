@@ -198,6 +198,16 @@ namespace Qt {
 [[nodiscard]] inline QColor WavePlayed() { return ToQColor(Active::kWavePlayed); }
 [[nodiscard]] inline QColor WaveUnplayed() { return ToQColor(Active::kWaveUnplayed); }
 [[nodiscard]] inline QColor WaveTick() { return ToQColor(Active::kWaveTick); }
+
+// MD3 player roles (mini bar / player card, design.md §5).
+[[nodiscard]] inline QColor PlayerSurface() { return ToQColor(Active::M3::kSurfaceContainer); }
+[[nodiscard]] inline QColor PlayerPrimary() { return ToQColor(Active::M3::kPrimary); }
+[[nodiscard]] inline QColor PlayerOnPrimary() { return ToQColor(Active::M3::kOnPrimary); }
+[[nodiscard]] inline QColor PlayerPrimaryContainer() { return ToQColor(Active::M3::kPrimaryContainer); }
+[[nodiscard]] inline QColor PlayerSecondaryContainer() { return ToQColor(Active::M3::kSecondaryContainer); }
+[[nodiscard]] inline QColor PlayerOnSecondaryContainer() { return ToQColor(Active::M3::kOnSecondaryContainer); }
+[[nodiscard]] inline QColor PlayerOnSurface() { return ToQColor(Active::M3::kOnSurface); }
+[[nodiscard]] inline QColor PlayerOnSurfaceVariant() { return ToQColor(Active::M3::kOnSurfaceVariant); }
 } // namespace Qt
 
 #endif // KATSUKI_DESIGN_HAS_QT_COLOR

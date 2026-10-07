@@ -92,14 +92,16 @@ Build registration: every new `.cpp` must be added to `Telegram/CMakeLists.txt` 
 - Repo: `haerin-tg/katsuki-desktop` — **standalone** (NOT a fork), full history (26,611 commits), default branch `dev`.
 - Branches: `dev`, `katsuki-ui` (old probe commits: `4bfa6d8` tokens+waveform, noise commits `ca51afe/90be22a/a3ca3b9/8a86d49` — squash later).
 - CI: 20 upstream workflows; push to `dev` triggers Linux/Windows/MacOS/MacOS-Packaged/Snap. Dev builds use `TDESKTOP_API_TEST=ON` (no secrets). Release builds later: secrets `TDESKTOP_API_ID` / `TDESKTOP_API_HASH` from my.telegram.org.
+- **CI triage 2026-10-07 (first katsuki-ui CI round): Linux ✅ · Windows ❌ Qt6-only `QMouseEvent::position()` · MacOS ❌ ftp.gnu.org timeout building libiconv (flake) · MacOS-Packaged ❌ `find_library(tlottie)` not found · Snap ❌ `git describe --tags` = "No names found" (no tags were pushed with the history).** Fixes in the same round: Qt5 version guard in `katsuki_waveform.cpp`; tlottie build step added to `mac_packaged.yml`; upstream tag `v7.2.10` fetched + pushed (tag pushes trigger no workflows — all filters are `branches(-ignore)` only).
+- **MacOS-Packaged tlottie failure is upstream-inherited:** upstream `tdesktop`'s own `mac_packaged.yml` runs fail the same way (tlottie is not in Homebrew and the packaged build never runs `prepare.py`, which is what builds tlottie for `mac.yml`). Our workflow now builds it exactly like `prepare.py` does (dkaraush/tlottie @ `31f1b542f8…`, `desktop-app/patches` @ `ebcd707f17…`, rust 1.96.1, universal lipo → `local/tlottie`).
 - `paths-ignore` in workflows: `docs/**`, `**.md` don't trigger builds → put design assets under `docs/` to keep CI quiet.
 - Old fork `haerin-tg/tdesktopmac` — archived; user wants deletion eventually.
 
 ## 6 · Tooling quirks (this workspace)
 
 - `tools/gh` binary (v2.63.2) + `gh auth setup-git` required for pushes. Scopes: `repo, read:org, gist, workflow`.
-- No local cmake/Qt — compile feedback comes from CI only.
-- Screenshots: Chrome copy at `.openclaw/tmp/chrome/chrome` (chmod +x'd), via `AGENT_BROWSER_EXECUTABLE_PATH=/home/work/.openclaw/workspace/.openclaw/tmp/chrome/chrome` + `agent-browser open/set viewport/screenshot`.
+- No local cmake/Qt — compile feedback comes from CI only. For Qt-version-sensitive code, the **dual-path stub harness** applies: minimal Qt stubs in workspace `.openclaw/tmp/qtstub/` (`qt5/` defines `QT_VERSION` 5.x with Qt5-only surface, `qt6/` with Qt6-only surface, `common/` shared), then `g++ -fsyntax-only` both paths. Mutually exclusive stubs prove the version guard picks the right API (negative control must fail).
+- Screenshots: agent-browser needs a chmod +x'd Chromium (`AGENT_BROWSER_EXECUTABLE_PATH=...`); system `/opt/ms-playwright` binaries are root-owned without +x. The workspace-local Chrome copy was removed (workspace slim-down) — re-copy from Playwright if screenshots are needed again.
 - Shallow clones can't be pushed (`index-pack failed`); already unshallowed.
 - Empty commits never trigger these workflows (paths-ignore over zero changed files).
 
@@ -137,6 +139,13 @@ Build registration: every new `.cpp` must be added to `Telegram/CMakeLists.txt` 
 - `g++ -std=c++17 -Wall -Wextra -Werror` syntax + codegen on the header with **30+ `static_assert`s pinning every token to the §1 values** — passes.
 - Qt-bridge smoke test with a stub `QColor` (accents resolve to `rgba(51,144,236,255)`, wave played `rgba(46,124,214,255)`) — passes.
 - Test files live in the workspace (`.openclaw/tmp/token_test.cpp`), intentionally **not** committed — CI compiles the real thing with real Qt.
+
+### 2026-10-07 (evening) — CI repairs: Qt5 compat, tlottie, snap tags
+
+1. `katsuki_waveform.cpp` — `QMouseEvent::position()` is Qt6-only and the Windows CI compiles against Qt5. Replaced both call sites with a `MouseLocalPosition()` helper behind `#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)` (Qt6 → `position()`, Qt5 → `localPos()`). Audited the module for other Qt6-only APIs — none left.
+   - **Verified with the dual-path stub harness** (see §6): both `qt5/` and `qt6/` paths pass `g++ -std=c++17 -fsyntax-only -Wall`; negative control (unguarded `position()`) fails on qt5 and passes on qt6 — guard proven, not assumed.
+2. `.github/workflows/mac_packaged.yml` — added Tlottie cache + build steps (pinned `TLOTTIE`/`PATCHES` shas in `env`, rustup 1.96.1, universal `lipo` → `$LibrariesPath/local/tlottie`). Root-cause details in §5.
+3. Snap — pushed upstream tag `v7.2.10` (fetched from `telegramdesktop/tdesktop`; it is an ancestor of `dev`). `snapcraft.yaml`'s `git describe --tags` version suffix now resolves (`v7.2.10-145-g…` at the time of writing). One tag is enough; no need to mirror all upstream tags.
 
 **Branch note:** `katsuki-ui` was reconciled with `dev` first (merged) — the katsuki module now exists on top of the latest design docs; this removes the drift where `dev` had newer docs but no code and `katsuki-ui` had code on stale docs.
 

@@ -156,7 +156,9 @@ Status: **chat view v1 ✅ approved 2026-10-07** (`docs/design-mockups/chat-view
 bubbles r22/tail r8, reply quotes, voice messages with the Katsuki waveform, composer pill).
 **Chat list + folder bar v1 drafted** (`chat-list-v1.{html,png}` — folder pills, search pill,
 dialog rows r18 with selected/hover/unread/mention/pinned/muted/verified states) — pending approval.
-Next: settings mockup (T3).
+**Settings v1 drafted** (`settings-v1.{html,png}` — profile header, section cards, info rows,
+toggles, theme/accent chips) — pending approval.
+Next: shared chrome pass (T4), then implementation.
 
 ## Presentation (mockups only — not product UI)
 

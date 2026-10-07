@@ -33,6 +33,13 @@ Status after the 2026-10-07 hardening round (details & root causes: [`raw.md`](r
 > re-enable with `gh workflow enable <name>` when/if those platforms matter).
 > Kept: `Windows.` (the product) + `Linux.` (fastest compile check, second compiler).
 > Every push now runs 2 builds per branch instead of 5.
+>
+> **Build targets (2026-10-07, user decision): Windows x64 only.**
+> The win.yml matrix was `x64_x86 | x64 | arm64` × Qt5/Qt6 × 2 generators = 8 jobs;
+> now trimmed to **x64 × (Qt5 + Qt6) = 2 jobs**. Qt5 stays as a compat canary
+> (it caught the `QMouseEvent::position()` bug), Qt6 is the build we ship.
+> Linux job is already x64-only (Rocky Linux 8 container). Full matrix details:
+> [`raw.md`](raw.md) §5.
 
 Local verification convention (no local Qt/cmake): **dual-path stub harness** — compile `katsuki/` sources with `g++ -fsyntax-only` against mutually exclusive Qt5/Qt6 stub trees; the version guard is proven by a negative control. See `raw.md` §6.
 

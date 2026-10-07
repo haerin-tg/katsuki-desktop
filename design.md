@@ -150,6 +150,8 @@ README banner = **typography lockup**: heavy sans `KATSU` + outlined `KI` + Geor
 
 Code lives in `Telegram/SourceFiles/katsuki/` (branch `katsuki-ui`, merged to `dev`). Token numbers & verification details in [`raw.md`](raw.md) §8. Rolling status & CI matrix in [`progress.md`](progress.md).
 
+**Build targets:** Windows **x64** is the product (Qt6 shipping build, Qt5 kept as a compat canary). Linux x64 is compiled as a fast error check only. macOS/Snap/32-bit/ARM builds are out of scope for now (`raw.md` §5).
+
 | Piece | Status |
 |---|---|
 | **Design token system v2** (`katsuki_design.h`) | ✅ landed — flat palette, MD3 player color roles, shape/radius/type/space scales, `Active` theme alias (Light), Qt bridge |

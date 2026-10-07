@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Katsuki / Settings v1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF; --canvas:#E9EBEF; --subtle:#F3F4F6; --border:#E6E8EB;
+    --text:#111418; --text-2:#656D76;
+    --accent:#3390EC; --accent-soft:#E7F1FD; --accent-tint:#D3E5F9; --on-accent-soft:#2374CC;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Geist',sans-serif; letter-spacing:-0.011em; color:var(--text);
+    background:
+      radial-gradient(at 12% 12%, #FFC2D8 0%, transparent 55%),
+      radial-gradient(at 88% 6%, #FFE08F 0%, transparent 50%),
+      radial-gradient(at 74% 94%, #AEC8FF 0%, transparent 55%),
+      radial-gradient(at 22% 86%, #C9B4FF 0%, transparent 52%),
+      radial-gradient(at 55% 42%, #A5E1C2 0%, transparent 48%),
+      linear-gradient(135deg,#FBEAF1 0%,#E3EAFC 100%);
+    padding:30px 30px 46px; width:1240px;
+  }
+  .label{display:flex;align-items:center;gap:10px;font-size:13.5px;color:#3a3f47;margin-bottom:6px}
+  .label .dot{width:9px;height:9px;border-radius:999px;background:var(--accent)}
+  .label b{font-weight:600}
+  .tag{
+    display:inline-block;font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.13em;
+    text-transform:uppercase;color:#4a4560;background:rgba(255,255,255,.72);border-radius:999px;
+    padding:6px 13px;margin:18px 0 12px;
+  }
+
+  .panel{
+    width:760px;background:var(--bg);border:1px solid var(--border);border-radius:28px;
+    padding:22px;display:inline-flex;flex-direction:column;gap:16px;vertical-align:top
+  }
+
+  /* profile header */
+  .phead{display:flex;align-items:center;gap:16px;padding:6px 8px 2px}
+  .phead .av{width:64px;height:64px;border-radius:999px;background:var(--accent-soft);color:#2A72C4;
+             display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600}
+  .phead .n{font-size:19px;font-weight:600}
+  .phead .s{font-size:12.5px;color:var(--text-2);margin-top:2px}
+  .editpill{margin-left:auto;height:38px;padding:0 18px;border-radius:999px;background:var(--subtle);
+            display:flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--text)}
+
+  /* section card */
+  .sec{background:var(--bg);border:1px solid var(--border);border-radius:20px;overflow:hidden}
+  .sec h3{
+    font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.13em;text-transform:uppercase;
+    color:var(--text-2);font-weight:500;padding:14px 18px 8px
+  }
+  .it{display:flex;align-items:center;gap:13px;padding:11px 18px}
+  .it + .it{border-top:1px solid var(--border)}
+  .tile{width:33px;height:33px;border-radius:10px;background:var(--subtle);flex:none;
+        display:flex;align-items:center;justify-content:center;color:var(--text-2)}
+  .k{font-size:14px;font-weight:500}
+  .v{font-size:13px;color:var(--text-2);margin-top:1px}
+  .val{margin-left:auto;font-size:13.5px;color:var(--text-2);display:flex;align-items:center;gap:8px}
+  .val .mono{font-family:'Geist Mono',monospace;font-size:11.5px}
+
+  /* toggle */
+  .tg{width:46px;height:26px;border-radius:999px;background:var(--border);flex:none;position:relative}
+  .tg i{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:999px;background:#fff}
+  .tg.on{background:var(--accent)}
+  .tg.on i{left:23px}
+
+  /* theme chips */
+  .chips{margin-left:auto;display:flex;gap:8px}
+  .chip{height:32px;padding:0 15px;border-radius:999px;background:var(--subtle);color:var(--text-2);
+        font-size:12.5px;font-weight:500;display:flex;align-items:center;gap:7px}
+  .chip.sel{background:var(--accent-soft);color:var(--on-accent-soft);font-weight:600}
+  .sw{width:13px;height:13px;border-radius:999px;flex:none}
+
+  .strip{display:flex;gap:14px;margin-top:2px}
+  .card{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:18px 20px}
+  .card h4{font-size:11px;font-family:'Geist Mono',monospace;letter-spacing:0.13em;text-transform:uppercase;
+           color:var(--text-2);font-weight:500;margin-bottom:12px}
+</style>
+</head>
+<body>
+
+  <div class="label"><span class="dot"></span><b>Katsuki / Settings v1</b> · rabbitgram-round · flat surfaces · one accent</div>
+
+  <div class="tag">a · settings — profile header · section cards · info rows · toggles · theme chips</div>
+
+  <div class="panel">
+    <div class="phead">
+      <div class="av">K</div>
+      <div>
+        <div class="n">Katsuki User</div>
+        <div class="s">@katsuki · +1 ••• ••• 4821</div>
+      </div>
+      <div class="editpill">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3 21 7 7.5 20.5 3 21.5 4 17z"/></svg>
+        Edit profile
+      </div>
+    </div>
+
+    <div class="sec">
+      <h3>Account</h3>
+      <div class="it">
+        <div class="tile"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div><div class="k">Phone number</div><div class="v">Tap to change · verification via Telegram</div></div>
+        <div class="val">+1 ••• ••• 4821 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></div>
+      </div>
+      <div class="it">
+        <div class="tile"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M5 21c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg></div>
+        <div><div class="k">Username</div><div class="v">t.me/katsuki</div></div>
+        <div class="val"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <h3>Appearance</h3>
+      <div class="it">
+        <div class="tile"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 4v16M4 12h16"/></svg></div>
+        <div><div class="k">Theme</div></div>
+        <div class="chips">
+          <div class="chip sel"><span class="sw" style="background:#fff;border:1px solid var(--border)"></span>Light</div>
+          <div class="chip"><span class="sw" style="background:#191C21"></span>Dark</div>
+          <div class="chip"><span class="sw" style="background:linear-gradient(90deg,#fff 50%,#191C21 50%)"></span>Auto</div>
+        </div>
+      </div>
+      <div class="it">
+        <div class="tile"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5" fill="currentColor" stroke="none"/></svg></div>
+        <div><div class="k">Accent color</div></div>
+        <div class="chips">
+          <div class="chip sel"><span class="sw" style="background:#3390EC"></span>Telegram</div>
+          <div class="chip"><span class="sw" style="background:#7C5CFF"></span>Violet</div>
+          <div class="chip"><span class="sw" style="background:#3ED598"></span>Mint</div>
+        </div>
+      </div>
+      <div class="it">
+        <div class="tile"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 20 20 4M4 4l16 16"/></svg></div>
+        <div><div class="k">Reduce motion</div><div class="v">Disables springs, spin and hover animations</div></div>
+        <div class="val"><div class="tg"><i></i></div></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <h3>Notifications</h3>
+      <div class="it">
+        <div class="tile"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M10.3 21a2 2 0 0 0 3.4 0"/></svg></div>
+        <div><div class="k">Private chats</div><div class="v">Sound + banner</div></div>
+        <div class="val"><div class="tg on"><i></i></div></div>
+      </div>
+      <div class="it">
+        <div class="tile"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="4"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg></div>
+        <div><div class="k">Groups and channels</div><div class="v">Mentions only</div></div>
+        <div class="val"><div class="tg"><i></i></div></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <h3>About</h3>
+      <div class="it">
+        <div class="tile"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 11v5M12 8h.01"/></svg></div>
+        <div><div class="k">Katsuki Desktop</div><div class="v">Open source · GPL v3</div></div>
+        <div class="val"><span class="mono">v7.2.10 · 2026.10.07</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tag">b · component rules — info row (profile-style) · toggle · chips</div>
+
+  <div class="strip">
+    <div class="card" style="width:360px">
+      <h4>info row anatomy</h4>
+      <div class="sec">
+        <div class="it">
+          <div class="tile" style="background:var(--accent-tint);color:var(--on-accent-soft)">★</div>
+          <div><div class="k">icon tile 33² r10</div><div class="v">k 12.5/14 · v 13 text-2</div></div>
+          <div class="val">value ›</div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="width:280px">
+      <h4>toggle states</h4>
+      <div style="display:flex;gap:14px;align-items:center">
+        <div class="tg on"><i></i></div><div class="tg"><i></i></div>
+        <span style="font-size:12.5px;color:var(--text-2)">on · off — r999, 20px knob</span>
+      </div>
+    </div>
+    <div class="card" style="width:320px">
+      <h4>theme + accent chips</h4>
+      <div style="display:flex;gap:8px">
+        <div class="chip sel"><span class="sw" style="background:#3390EC"></span>selected</div>
+        <div class="chip"><span class="sw" style="background:#E6E8EB"></span>default</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

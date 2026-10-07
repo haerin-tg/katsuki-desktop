@@ -136,6 +136,8 @@ PRIVATE
     api/api_communities.cpp
     api/api_communities.h
     katsuki/katsuki_design.h
+    katsuki/katsuki_player_bar.cpp
+    katsuki/katsuki_player_bar.h
     katsuki/katsuki_waveform.cpp
     katsuki/katsuki_waveform.h
     data/data_search_calendar.h

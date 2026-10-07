@@ -43,6 +43,14 @@ Status after the 2026-10-07 hardening round (details & root causes: [`raw.md`](r
 
 Local verification convention (no local Qt/cmake): **dual-path stub harness** — compile `katsuki/` sources with `g++ -fsyntax-only` against mutually exclusive Qt5/Qt6 stub trees; the version guard is proven by a negative control. See `raw.md` §6.
 
+> **Windows runner note (2026-10-07):** the first Qt5-fix round "failed 7/8 jobs" —
+> root cause was **runner disk exhaustion** (`C1085 No space left on device`) in one
+> job + `fail-fast` cascade-canceling the rest. Fixes in `win.yml`: early disk cleanup
+> step (~20 GB of preinstalled Android/CodeQL/Node/Ruby/Go toolchains removed before
+> the caches load) + `fail-fast: false` so a single job failure no longer eats the
+> whole matrix. Not a code problem — one job (`x64, qt6, Ninja`) went green on the
+> same commit.
+
 ## Roadmap
 
 - [x] 0. Repo prep: standalone repo, gh auth, Actions enabled, CI green loop

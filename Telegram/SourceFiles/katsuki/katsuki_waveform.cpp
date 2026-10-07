@@ -16,6 +16,14 @@ namespace {
 constexpr auto kBarRadius = 0.6;
 constexpr auto kBarWidthFraction = 1.1; // % of widget width per bar
 
+[[nodiscard]] QPointF MouseLocalPosition(QMouseEvent *e) {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	return e->position();
+#else // Qt 5
+	return e->localPos();
+#endif
+}
+
 } // namespace
 
 WaveformWidget::WaveformWidget(QWidget *parent)
@@ -66,12 +74,12 @@ void WaveformWidget::requestSeek(QPointF position) {
 
 void WaveformWidget::mousePressEvent(QMouseEvent *e) {
 	_dragging = true;
-	requestSeek(e->position());
+	requestSeek(MouseLocalPosition(e));
 }
 
 void WaveformWidget::mouseMoveEvent(QMouseEvent *e) {
 	if (_dragging) {
-		requestSeek(e->position());
+		requestSeek(MouseLocalPosition(e));
 	}
 }
 

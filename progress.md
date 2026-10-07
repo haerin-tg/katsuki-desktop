@@ -57,11 +57,12 @@ Local verification convention (no local Qt/cmake): **dual-path stub harness** �
 > islands — chat view, chat list, folder bar, settings and shared chrome all get the
 > `shapes.html` design language. Design passes (HTML mockups → user approval) precede code.
 > Detailed targets: `design.md` § “Full-app UI expansion”.
+> **Note:** the workspace clone directory is now `work/katsuki-desktop/` (old name `tdesktopmac` is dead).
 
 **UI expansion targets (in design-pass order):**
 
-- [ ] **T1 · Chat view design pass** — bubbles, groups, replies, composer, header, date dividers (the `shapes.html` look for conversation)
-- [ ] **T2 · Chat list + folder bar design pass** — dialog rows, badges, search, folder tabs/pills
+- [x] **T1 · Chat view design pass** — ✅ **approved 2026-10-07** (`chat-view-v1.{html,png}`): bubbles r22/tail r8, groups, reply quote, voice + waveform, date dividers, composer pill
+- [ ] **T2 · Chat list + folder bar design pass** — dialog rows, badges, search, folder tabs/pills ← NEXT
 - [ ] **T3 · Settings design pass** — section cards, rows, toggles
 - [ ] **T4 · Shared chrome pass** — main window layout, titlebar, panel proportions
 - [ ] **I1 · Implement chat list** (`dialogs/`) — biggest visible win

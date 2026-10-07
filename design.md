@@ -152,6 +152,10 @@ Process per surface (the established loop): **HTML mockup in the design language
 user reviews → lock into `design.md`/`raw.md` → implement in `Telegram/SourceFiles/…` → CI.**
 Design passes come first; nothing ships to code without a locked mockup.
 
+Status: **chat view v1 ✅ approved 2026-10-07** (`docs/design-mockups/chat-view-v1.{html,png}` —
+bubbles r22/tail r8, reply quotes, voice messages with the Katsuki waveform, composer pill).
+Next: chat list + folder bar mockup (T2).
+
 ## Presentation (mockups only — not product UI)
 
 The mockup pages sit on a **pastel gradient canvas** (pink → yellow → blue → lilac → mint radials over a soft warm base — clearly visible colors, not washed out) so the white panels pop in screenshots and the README. **The product UI itself stays flat and solid** — the gradient is presentation chrome only.

@@ -62,7 +62,7 @@ Local verification convention (no local Qt/cmake): **dual-path stub harness** �
 **UI expansion targets (in design-pass order):**
 
 - [x] **T1 · Chat view design pass** — ✅ **approved 2026-10-07** (`chat-view-v1.{html,png}`): bubbles r22/tail r8, groups, reply quote, voice + waveform, date dividers, composer pill
-- [ ] **T2 · Chat list + folder bar design pass** — dialog rows, badges, search, folder tabs/pills ← NEXT
+- [~] **T2 · Chat list + folder bar design pass** — **drafted** (`chat-list-v1.{html,png}`): folder pills, search pill, dialog rows r18 (selected/hover/unread/mention/pinned/muted/verified) — **awaiting user approval**
 - [ ] **T3 · Settings design pass** — section cards, rows, toggles
 - [ ] **T4 · Shared chrome pass** — main window layout, titlebar, panel proportions
 - [ ] **I1 · Implement chat list** (`dialogs/`) — biggest visible win

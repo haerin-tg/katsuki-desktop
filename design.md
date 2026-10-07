@@ -154,7 +154,9 @@ Design passes come first; nothing ships to code without a locked mockup.
 
 Status: **chat view v1 ✅ approved 2026-10-07** (`docs/design-mockups/chat-view-v1.{html,png}` —
 bubbles r22/tail r8, reply quotes, voice messages with the Katsuki waveform, composer pill).
-Next: chat list + folder bar mockup (T2).
+**Chat list + folder bar v1 drafted** (`chat-list-v1.{html,png}` — folder pills, search pill,
+dialog rows r18 with selected/hover/unread/mention/pinned/muted/verified states) — pending approval.
+Next: settings mockup (T3).
 
 ## Presentation (mockups only — not product UI)
 

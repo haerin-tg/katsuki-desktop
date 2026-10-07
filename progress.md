@@ -28,6 +28,12 @@ Status after the 2026-10-07 hardening round (details & root causes: [`raw.md`](r
 | MacOS-Packaged | ❌ `find_library(tlottie)` missing (upstream-inherited) | tlottie build step in `mac_packaged.yml` (mirrors `prepare.py`) | ⏳ pending verification |
 | Snap | ❌ `git describe --tags` → "No names found" | pushed upstream tag `v7.2.10` (ancestor of `dev`) | ✅ expected |
 
+> **Workflow scope (2026-10-07, user decision): the product is Windows-only.**
+> `MacOS.` / `MacOS Packaged.` / `Snap.` are **disabled** (`gh workflow disable`,
+> re-enable with `gh workflow enable <name>` when/if those platforms matter).
+> Kept: `Windows.` (the product) + `Linux.` (fastest compile check, second compiler).
+> Every push now runs 2 builds per branch instead of 5.
+
 Local verification convention (no local Qt/cmake): **dual-path stub harness** — compile `katsuki/` sources with `g++ -fsyntax-only` against mutually exclusive Qt5/Qt6 stub trees; the version guard is proven by a negative control. See `raw.md` §6.
 
 ## Roadmap

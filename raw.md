@@ -142,6 +142,13 @@ Build registration: every new `.cpp` must be added to `Telegram/CMakeLists.txt` 
 - Qt-bridge smoke test with a stub `QColor` (accents resolve to `rgba(51,144,236,255)`, wave played `rgba(46,124,214,255)`) — passes.
 - Test files live in the workspace (`.openclaw/tmp/token_test.cpp`), intentionally **not** committed — CI compiles the real thing with real Qt.
 
+### 2026-10-07 (evening) — mini player bar (`Katsuki::PlayerBar`)
+
+1. `katsuki_design.h` — `Design::Qt` bridges for the MD3 player roles (surface/primary/secondary containers, on-surface variants). Components never hand-roll `ToQColor`.
+2. `katsuki_player_bar.{h,cpp}` (new, registered in `Telegram/CMakeLists.txt`) — MD3 mini player per `design.md` §5, geometry copied from `player-v2.html`'s `.mini` (padding 10×14, gap 14, thumb 48² r12, play 44 tonal, icon buttons 48, 3px progress line clipped to the rounded surface). Title 14/500 + subtitle 12/400 with `QFontMetrics` elision. Actions via `std::function` callbacks (no moc), top band scrubs seek 0..1. Qt5/Qt6-safe: version-guarded mouse position + font weight (Qt5 uses the 0..99 weight scale).
+   - **Dual-path stub verification:** both `katsuki_waveform` and `katsuki_player_bar` pass `g++ -fsyntax-only -Wall` on the qt5 and qt6 stub trees.
+   - Design deviation (deliberate): `Type::kCaption` is 12.5 → rendered at pixel 12 (int cast), matching the mockup's 12px subtitle.
+
 ### 2026-10-07 (evening) — CI repairs: Qt5 compat, tlottie, snap tags
 
 1. `katsuki_waveform.cpp` — `QMouseEvent::position()` is Qt6-only and the Windows CI compiles against Qt5. Replaced both call sites with a `MouseLocalPosition()` helper behind `#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)` (Qt6 → `position()`, Qt5 → `localPos()`). Audited the module for other Qt6-only APIs — none left.
@@ -151,4 +158,4 @@ Build registration: every new `.cpp` must be added to `Telegram/CMakeLists.txt` 
 
 **Branch note:** `katsuki-ui` was reconciled with `dev` first (merged) — the katsuki module now exists on top of the latest design docs; this removes the drift where `dev` had newer docs but no code and `katsuki-ui` had code on stale docs.
 
-**Next up (roadmap order):** theme → `.style`/`lib_ui` mapping, then `katsuki/profile/` (profile box: hero + compact variants, song card, channel card, info rows, profile tab pill), then `katsuki/music/` + `KatsukiPlayerBar` (MD3).
+**Next up (roadmap order):** theme → `.style`/`lib_ui` mapping, then `katsuki/profile/` (profile box: hero + compact variants, song card, channel card, info rows, profile tab pill), then full MD3 player panel + `katsuki/music/` (mini bar `Katsuki::PlayerBar` already landed — see above).

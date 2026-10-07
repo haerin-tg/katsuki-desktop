@@ -156,6 +156,7 @@ Code lives in `Telegram/SourceFiles/katsuki/` (branch `katsuki-ui`, merged to `d
 |---|---|
 | **Design token system v2** (`katsuki_design.h`) | ✅ landed — flat palette, MD3 player color roles, shape/radius/type/space scales, `Active` theme alias (Light), Qt bridge |
 | **Waveform scrubber** (`katsuki_waveform.{h,cpp}`) | ✅ reworked onto v2 tokens (optional scrubber skin; MD3 slider is the primary control) — Qt5/Qt6 version-guarded mouse handling |
+| **Mini player bar** (`katsuki_player_bar.{h,cpp}`, `Katsuki::PlayerBar`) | ✅ landed — surface-container r20, 3px top progress, 48² thumb, prev/next + tonal play, elided title/subtitle, top-band scrubbing |
 | Profile UI (hero + compact, song card, channel card, tab pill) | ⬜ next — `katsuki/profile/` |
 | Playlist sheet + song-card variants | ⬜ — `katsuki/music/` |
 | MD3 player + mini bar | ⬜ — `KatsukiPlayerBar` |

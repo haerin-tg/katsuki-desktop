@@ -47,6 +47,7 @@ Local verification convention (no local Qt/cmake): **dual-path stub harness** �
 
 - [x] 0. Repo prep: standalone repo, gh auth, Actions enabled, CI green loop
 - [x] 1. First module: design token system v2 + waveform widget (`46850f6a80` + Qt5 compat fix)
+- [x] 1b. Mini player bar `Katsuki::PlayerBar` (`c0bc339473`) — MD3 mini per design.md §5
 - [ ] 2. **Design tokens + themes** in `style/` + `lib_ui` — extend `katsuki_design.h` into real theme files
 - [ ] 3. **Dock + titlebar** — custom titlebar, floating dock with magnification math
 - [ ] 4. **Floating player** — `KatsukiPlayerBar` custom `RpWidget`, playback core untouched
@@ -58,11 +59,13 @@ Each step: code → `katsuki-ui` → CI → verify → merge `dev`.
 
 ## Session log
 
-### 2026-10-07 (evening) — resumed after compute-quota kill; CI repairs
+### 2026-10-07 (evening) — resumed after compute-quota kill; CI repairs; mini player
 - GitHub re-auth (device flow), full workspace restored from the exported snapshot.
 - Applied & verified the Qt5 waveform fix that was mid-flight when the previous session died (dual-path stub check: qt5 ✅ qt6 ✅ negative control ✅).
 - Root-caused all remaining CI failures (table above). tlottie/MacOS-Packaged is upstream-inherited — upstream tdesktop's own `mac_packaged` runs fail identically.
 - Fixed `mac_packaged.yml` (tlottie from source, pinned shas) + snap versioning (tag `v7.2.10` pushed).
+- **Scope decisions (user):** Windows-only product → Mac/Mac-Packaged/Snap workflows disabled; Windows x64 only → win.yml matrix trimmed 8 jobs → 2 (Qt6 shipping + Qt5 canary). Linux x64 kept as fast compile check.
+- **Mini player bar landed** (`Katsuki::PlayerBar`, `katsuki_player_bar.{h,cpp}`) + MD3 color-role Qt bridges in `katsuki_design.h`. Stub-verified on both Qt paths.
 - Docs: `design.md`/`raw.md` updated, this file created.
 
 ### 2026-10-07 (earlier sessions)

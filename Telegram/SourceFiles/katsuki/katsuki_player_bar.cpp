@@ -122,7 +122,7 @@ void PaintPlayGlyph(QPainter &p, const QRectF &box, const QColor &color) {
 	path.moveTo(QPointF(box.x() + 8 * s, box.y() + 5.5 * s));
 	path.lineTo(QPointF(box.x() + 8 * s, box.y() + 18.5 * s));
 	path.lineTo(QPointF(box.x() + 19 * s, box.y() + 12 * s));
-	path.closePath();
+	path.closeSubpath();
 	p.drawPath(path);
 }
 
@@ -140,7 +140,7 @@ void PaintPrevGlyph(QPainter &p, const QRectF &box, const QColor &color) {
 	path.moveTo(QPointF(box.x() + 19 * s, box.y() + 6 * s));
 	path.lineTo(QPointF(box.x() + 19 * s, box.y() + 18 * s));
 	path.lineTo(QPointF(box.x() + 9.5 * s, box.y() + 12 * s));
-	path.closePath();
+	path.closeSubpath();
 	p.drawPath(path);
 }
 
@@ -152,7 +152,7 @@ void PaintNextGlyph(QPainter &p, const QRectF &box, const QColor &color) {
 	path.moveTo(QPointF(box.x() + 5 * s, box.y() + 6 * s));
 	path.lineTo(QPointF(box.x() + 5 * s, box.y() + 18 * s));
 	path.lineTo(QPointF(box.x() + 14.5 * s, box.y() + 12 * s));
-	path.closePath();
+	path.closeSubpath();
 	p.drawPath(path);
 }
 

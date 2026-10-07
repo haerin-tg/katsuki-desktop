@@ -75,6 +75,8 @@ background:
 
 ## 4 · Map to tdesktop source (implementation)
 
+**UI expansion implementation map (2026-10-07 mandate):** chat view → `Telegram/SourceFiles/history/` (history_view message/bubble components) + `info/profile` header patterns; chat list → `Telegram/SourceFiles/dialogs/` (rows, inner list, search); folder bar → `dialogs/dialogs_filters` (folder tabs); settings → `Telegram/SourceFiles/settings/` + shared `boxes/` info-rows; chrome → `Telegram/SourceFiles/window/`. Every surface re-skinned through the token system (`katsuki_design.h` → later `style/`/`lib_ui` mapping) — no hardcoded colors.
+
 | Feature | Where |
 |---|---|
 | Design tokens | `Telegram/SourceFiles/katsuki/katsuki_design.h` — **✅ v2 token system landed** (flat palette, MD3 player roles, shape/radius/type scales, `Active` theme alias; see §8) |

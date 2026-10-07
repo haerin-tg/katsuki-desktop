@@ -53,10 +53,31 @@ Local verification convention (no local Qt/cmake): **dual-path stub harness** �
 
 ## Roadmap
 
+> **2026-10-07 mandate: full-app UI upgrade.** The redesign is not limited to the player/profile
+> islands — chat view, chat list, folder bar, settings and shared chrome all get the
+> `shapes.html` design language. Design passes (HTML mockups → user approval) precede code.
+> Detailed targets: `design.md` § “Full-app UI expansion”.
+
+**UI expansion targets (in design-pass order):**
+
+- [ ] **T1 · Chat view design pass** — bubbles, groups, replies, composer, header, date dividers (the `shapes.html` look for conversation)
+- [ ] **T2 · Chat list + folder bar design pass** — dialog rows, badges, search, folder tabs/pills
+- [ ] **T3 · Settings design pass** — section cards, rows, toggles
+- [ ] **T4 · Shared chrome pass** — main window layout, titlebar, panel proportions
+- [ ] **I1 · Implement chat list** (`dialogs/`) — biggest visible win
+- [ ] **I2 · Implement folder bar** (`dialogs/dialogs_filters`)
+- [ ] **I3 · Implement chat view** (`history/` view components + composer)
+- [ ] **I4 · Implement settings** (`settings/` + shared info-row component)
+- [ ] **I5 · Chrome + themes** — `style/` + `lib_ui` token mapping, titlebar/dock
+
+Each target: mockup → approval → implementation → CI → update this file.
+
+**Classic roadmap (foundations, still valid):**
+
 - [x] 0. Repo prep: standalone repo, gh auth, Actions enabled, CI green loop
 - [x] 1. First module: design token system v2 + waveform widget (`46850f6a80` + Qt5 compat fix)
 - [x] 1b. Mini player bar `Katsuki::PlayerBar` (`c0bc339473`) — MD3 mini per design.md §5
-- [ ] 2. **Design tokens + themes** in `style/` + `lib_ui` — extend `katsuki_design.h` into real theme files
+- [ ] 2. **Design tokens + themes** in `style/` + `lib_ui` — extend `katsuki_design.h` into real theme files (moved behind the UI targets per the 2026-10-07 mandate; runs parallel to I5)
 - [ ] 3. **Dock + titlebar** — custom titlebar, floating dock with magnification math
 - [ ] 4. **Floating player** — `KatsukiPlayerBar` custom `RpWidget`, playback core untouched
 - [ ] 5. **Profile hero** — `KatsukiProfileBox` (hero + compact variants per design.md §1)

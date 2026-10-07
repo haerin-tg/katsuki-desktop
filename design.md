@@ -131,6 +131,27 @@ System reference: buttons (primary/tonal/neutral/outline + small), chips (select
 
 ---
 
+## Full-app UI expansion (mandate 2026-10-07)
+
+The redesign covers **the whole client**, not just the player/profile islands. Every surface
+gets the same language shown in `shapes.html` (**rabbitgram-round · flat surfaces · one accent**):
+heavy rounding on the MD3/product scales, flat solid surfaces (no glass, no gradients in product
+UI), Geist type scale, single accent `#3390EC`, MD3 state layers for hover/press.
+
+Surfaces to design & implement:
+
+| Surface | Look & feel | Notes |
+|---|---|---|
+| **Chat view** | bubbles, message groups, replies, composer, chat header, date dividers, service messages | the `shapes.html` language applied to conversation — the face of the app |
+| **Chat list** | dialog rows (avatar, name, preview, time, unread badge, pinned, muted, verified), search field | rows = rounded cards or clean flat rows with rounded hover state |
+| **Folder bar** | folder tabs / pills, unread counters, All-chats state | pill/tab shape per the shape scale, accent for selected |
+| **Settings** | section cards, setting rows, toggles, profile header | same info-row component as profile |
+| **Shared chrome** | main window layout, titlebar, side panel proportions | follows the dock/titlebar roadmap item |
+
+Process per surface (the established loop): **HTML mockup in the design language → PNG render →
+user reviews → lock into `design.md`/`raw.md` → implement in `Telegram/SourceFiles/…` → CI.**
+Design passes come first; nothing ships to code without a locked mockup.
+
 ## Presentation (mockups only — not product UI)
 
 The mockup pages sit on a **pastel gradient canvas** (pink → yellow → blue → lilac → mint radials over a soft warm base — clearly visible colors, not washed out) so the white panels pop in screenshots and the README. **The product UI itself stays flat and solid** — the gradient is presentation chrome only.

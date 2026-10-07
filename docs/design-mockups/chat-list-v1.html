@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Katsuki / Chat list + folder bar v1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF; --canvas:#E9EBEF; --subtle:#F3F4F6; --border:#E6E8EB;
+    --text:#111418; --text-2:#656D76;
+    --accent:#3390EC; --accent-soft:#E7F1FD; --accent-tint:#D3E5F9; --on-accent-soft:#2374CC;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Geist',sans-serif; letter-spacing:-0.011em; color:var(--text);
+    background:
+      radial-gradient(at 12% 12%, #FFC2D8 0%, transparent 55%),
+      radial-gradient(at 88% 6%, #FFE08F 0%, transparent 50%),
+      radial-gradient(at 74% 94%, #AEC8FF 0%, transparent 55%),
+      radial-gradient(at 22% 86%, #C9B4FF 0%, transparent 52%),
+      radial-gradient(at 55% 42%, #A5E1C2 0%, transparent 48%),
+      linear-gradient(135deg,#FBEAF1 0%,#E3EAFC 100%);
+    padding:30px 30px 46px; width:1240px;
+  }
+  .label{display:flex;align-items:center;gap:10px;font-size:13.5px;color:#3a3f47;margin-bottom:6px}
+  .label .dot{width:9px;height:9px;border-radius:999px;background:var(--accent)}
+  .label b{font-weight:600}
+  .tag{
+    display:inline-block;font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.13em;
+    text-transform:uppercase;color:#4a4560;background:rgba(255,255,255,.72);border-radius:999px;
+    padding:6px 13px;margin:20px 0 12px;
+  }
+
+  .panel{
+    width:420px;background:var(--bg);border:1px solid var(--border);border-radius:28px;
+    overflow:hidden;display:inline-flex;flex-direction:column;vertical-align:top
+  }
+  .side{width:420px;margin-right:22px}
+
+  /* folder bar */
+  .folders{display:flex;gap:8px;padding:16px 16px 4px;overflow:hidden}
+  .fpill{
+    display:flex;align-items:center;gap:7px;height:34px;padding:0 14px;border-radius:999px;
+    background:var(--subtle);color:var(--text-2);font-size:13px;font-weight:500;white-space:nowrap
+  }
+  .fpill.sel{background:var(--accent-soft);color:var(--on-accent-soft);font-weight:600}
+  .fpill .cnt{
+    font-family:'Geist Mono',monospace;font-size:10px;background:var(--accent);color:#fff;
+    border-radius:999px;padding:2px 7px
+  }
+  .fpill.sel .cnt{background:var(--on-accent-soft)}
+  .fpill.mut .cnt{background:var(--border);color:var(--text-2)}
+
+  /* search */
+  .search{margin:12px 16px 8px;height:42px;background:var(--subtle);border-radius:999px;
+          display:flex;align-items:center;gap:9px;padding:0 15px;color:var(--text-2);font-size:13.5px}
+
+  /* rows */
+  .list{padding:4px 8px 12px}
+  .row{display:flex;align-items:center;gap:12px;padding:9px 10px;border-radius:18px}
+  .row.sel{background:var(--accent-soft)}
+  .row.hov{background:var(--subtle)}
+  .av{width:48px;height:48px;border-radius:999px;flex:none;display:flex;align-items:center;
+      justify-content:center;font-size:16px;font-weight:600;color:#fff}
+  .meta{flex:1;min-width:0}
+  .top{display:flex;align-items:center;gap:6px}
+  .nm{font-size:14.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .vf{flex:none}
+  .tm{margin-left:auto;font-family:'Geist Mono',monospace;font-size:10.5px;color:var(--text-2);flex:none}
+  .row.sel .tm{color:var(--on-accent-soft)}
+  .pv{font-size:12.8px;color:var(--text-2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pv b{color:var(--accent);font-weight:500}
+  .row.sel .pv{color:var(--on-accent-soft)}
+  .right{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex:none}
+  .badge{font-family:'Geist Mono',monospace;font-size:10px;background:var(--accent);color:#fff;
+         border-radius:999px;padding:2.5px 7.5px}
+  .badge.mut{background:var(--border);color:var(--text-2)}
+  .badge.mention{background:var(--on-accent-soft)}
+  .row.muted .nm,.row.muted .pv{opacity:.62}
+  .pin{color:var(--text-2);flex:none}
+
+  /* variants strip */
+  .strip{display:flex;gap:14px;margin-top:2px}
+  .card{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:18px 20px;flex:1}
+  .card h4{font-size:11px;font-family:'Geist Mono',monospace;letter-spacing:0.13em;text-transform:uppercase;
+           color:var(--text-2);font-weight:500;margin-bottom:12px}
+  .rowdemo{display:flex;align-items:center;gap:8px}
+</style>
+</head>
+<body>
+
+  <div class="label"><span class="dot"></span><b>Katsuki / Chat list + folder bar v1</b> · rabbitgram-round · flat surfaces · one accent</div>
+
+  <div class="tag">a · folder pills + search + dialog rows — selected · unread · pinned · muted · verified</div>
+
+  <div class="side">
+    <div class="panel">
+      <div class="folders">
+        <div class="fpill sel">All Chats</div>
+        <div class="fpill">Personal <span class="cnt">3</span></div>
+        <div class="fpill">Work <span class="cnt">12</span></div>
+        <div class="fpill mut">Channels <span class="cnt">48</span></div>
+      </div>
+      <div class="search">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+        Search
+      </div>
+      <div class="list">
+
+        <div class="row sel">
+          <div class="av" style="background:#7C89A8">M</div>
+          <div class="meta">
+            <div class="top"><div class="nm">Mira Chen</div>
+              <svg class="vf" width="13" height="13" viewBox="0 0 24 24" fill="var(--accent)"><path d="M12 2 14.5 4.5 18 4 18.5 7.5 21.5 9.5 20 13 21.5 16.5 18.5 18.5 18 22 14.5 21.5 12 24 9.5 21.5 6 22 5.5 18.5 2.5 16.5 4 13 2.5 9.5 5.5 7.5 6 4 9.5 4.5z" opacity=".9"/><path d="m9 12 2 2 4-4.5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div class="tm">09:14</div>
+            </div>
+            <div class="pv"><b>You:</b> already on it 🚀</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="av" style="background:#3390EC">K</div>
+          <div class="meta">
+            <div class="top"><div class="nm">Katsuki Desktop</div><div class="tm">09:02</div></div>
+            <div class="pv"><b>Mira:</b> the folder pills are so good wtf</div>
+          </div>
+          <div class="right"><div class="badge">4</div></div>
+        </div>
+
+        <div class="row hov">
+          <div class="av" style="background:#C58FD8">D</div>
+          <div class="meta">
+            <div class="top"><div class="nm">Design Sync</div><div class="tm">08:47</div></div>
+            <div class="pv"><b>Alex:</b> pushed the new shape scale to Figma</div>
+          </div>
+          <div class="right"><div class="badge mention">@</div><div class="pin"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 3 21 8l-3 1-3.5 3.5L15 19l-2 2-3-6-6-3 2-2 6.5.5L16 7z"/></svg></div></div>
+        </div>
+
+        <div class="row">
+          <div class="av" style="background:#5FBB97">N</div>
+          <div class="meta">
+            <div class="top"><div class="nm">Nova Lane</div><div class="tm">Yest</div></div>
+            <div class="pv">voice message · 0:34</div>
+          </div>
+          <div class="right"><div class="pin"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 3 21 8l-3 1-3.5 3.5L15 19l-2 2-3-6-6-3 2-2 6.5.5L16 7z"/></svg></div></div>
+        </div>
+
+        <div class="row muted">
+          <div class="av" style="background:#E0A35F">R</div>
+          <div class="meta">
+            <div class="top"><div class="nm">RabbitGram Roundup</div><div class="tm">Yest</div></div>
+            <div class="pv">Weekly build is out — 42 changes</div>
+          </div>
+          <div class="right"><div class="badge mut">99+</div></div>
+        </div>
+
+        <div class="row">
+          <div class="av" style="background:#8A93A6">T</div>
+          <div class="meta">
+            <div class="top"><div class="nm">tdesktop upstream</div><div class="tm">Mon</div></div>
+            <div class="pv">CI is green again on all platforms</div>
+          </div>
+        </div>
+
+        <div class="row muted">
+          <div class="av" style="background:#D2695C">S</div>
+          <div class="meta">
+            <div class="top"><div class="nm">Shipping 🚢</div><div class="tm">Sun</div></div>
+            <div class="pv">Meeting moved to 15:00</div>
+          </div>
+          <div class="right"><div class="badge mut">2</div></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="side" style="margin-right:0">
+    <div class="panel" style="width:720px">
+      <div class="folders" style="padding-bottom:12px">
+        <div class="fpill sel">All Chats</div>
+        <div class="fpill">Personal <span class="cnt">3</span></div>
+        <div class="fpill">Work <span class="cnt">12</span></div>
+        <div class="fpill mut">Channels <span class="cnt">48</span></div>
+        <div class="fpill">Archive</div>
+        <div class="fpill">+ Add</div>
+      </div>
+    </div>
+
+    <div class="tag">b · row anatomy + states</div>
+
+    <div class="panel" style="width:720px">
+      <div class="list" style="padding:12px 10px">
+        <div class="row" style="background:var(--subtle)">
+          <div class="av" style="background:#3390EC">A</div>
+          <div class="meta">
+            <div class="top"><div class="nm">Anatomy</div><div class="tm">now</div></div>
+            <div class="pv">avatar 48 circle · name 14.5/600 · preview 12.8 · time mono 10.5 · row r18</div>
+          </div>
+          <div class="right"><div class="badge">1</div></div>
+        </div>
+        <div class="row sel" style="margin-top:6px">
+          <div class="av" style="background:#7C89A8">S</div>
+          <div class="meta">
+            <div class="top"><div class="nm">Selected state</div><div class="tm">now</div></div>
+            <div class="pv">accent-soft fill — text flips to on-accent-soft, no borders</div>
+          </div>
+        </div>
+        <div class="row" style="margin-top:6px">
+          <div class="av" style="background:#5FBB97">H</div>
+          <div class="meta">
+            <div class="top"><div class="nm">Hover state</div><div class="tm">now</div></div>
+            <div class="pv">subtle fill (MD3 state layer ≈ 8%) — same radius, no movement</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
